@@ -10,7 +10,7 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore" Version="2.1.1" />
-    <PackageReference Include="LeanCloud.Engine" Version="2018.7.6.1" />
+    <PackageReference Include="LeanCloud.Engine" Version="2018.7.9.2" />
   </ItemGroup>
   <ItemGroup>
     <None Remove=".DS_Store" />

@@ -72,6 +72,12 @@ namespace LeanCloud.Engine
         /// </summary>
         /// <value>The meta body.</value>
         public IDictionary<string, object> MetaBody { get; set; }
+
+        /// <summary>
+        /// Gets or sets the updated keys.
+        /// </summary>
+        /// <value>The updated keys.</value>
+        public IEnumerable<string> UpdatedKeys { get; set; }
     }
 
     /// <summary>

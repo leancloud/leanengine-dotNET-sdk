@@ -39,7 +39,7 @@ namespace LeanCloud.Engine.AspNetDemo
             //var myCloud = new MyCloud();
             //app.UseCloud((Cloud)myCloud);
             //myCloud.Start();
-            var cloud = new Cloud();
+            var cloud = new Cloud().EquipFunctions();
             app.UseCloud(cloud);
             cloud.Start();
             var routes = routeBuilder.Build();

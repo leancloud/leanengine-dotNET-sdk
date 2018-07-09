@@ -12,9 +12,6 @@ using Newtonsoft.Json;
 using Microsoft.Extensions.DependencyInjection;
 using System.Linq;
 using Microsoft.Extensions.Logging;
-using Microsoft.AspNetCore.Http.Internal;
-using System.Text;
-using Newtonsoft.Json.Linq;
 using Microsoft.AspNetCore.Routing.Template;
 using Microsoft.Extensions.Configuration;
 using LeanCloud.Storage.Internal;
@@ -378,13 +375,27 @@ namespace LeanCloud.Engine
                     CallType = funcOrRpc,
                     FunctionParameters = data
                 };
-                await cloudInstance.Invoke(funcName, funcOrRpc, engineContext);
-                var resultWrapper = new Dictionary<string, object>()
+                try
                 {
-                    { "result", engineContext.Result }
-                };
-                var encodedStr = JsonConvert.SerializeObject(resultWrapper);
-                await context.Response.WriteAsync(encodedStr);
+                    await cloudInstance.Invoke(funcName, funcOrRpc, engineContext);
+                    var resultWrapper = new Dictionary<string, object>()
+                    {
+                        { "result", engineContext.Result }
+                    };
+                    var encodedStr = JsonConvert.SerializeObject(resultWrapper);
+                    await context.Response.WriteAsync(encodedStr);
+                }
+                catch (Exception ex)
+                {
+                    if (ex is EngineException engineException)
+                    {
+                        await context.Response.WriteAsync(engineException);
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
             }
         }
 
@@ -423,6 +434,15 @@ namespace LeanCloud.Engine
                     {
                         "__before","__after"
                     });
+
+                    List<string> updatedKeys = null;
+                    if (objectMetaData.ContainsKey("_updatedKeys"))
+                    {
+                        if (objectMetaData["_updatedKeys"] is List<object> upKys)
+                        {
+                            updatedKeys = upKys.Select(k => k.ToString()).ToList();
+                        }
+                    }
                     var objectState = AVObjectCoder.Instance.Decode(objectMetaData, AVDecoder.Instance);
                     AVObject theObject = AVObject.FromState<AVObject>(objectState, className);
 
@@ -437,7 +457,7 @@ namespace LeanCloud.Engine
                     {
                         TheObject = theObject,
                         MetaBody = data,
-                        By = by
+                        By = by,
                     };
                     await cloudInstance.InvokeClassHook(className, hookName, engineContext);
                     await context.Response.WriteAsync(engineContext.TheObject);

@@ -387,6 +387,18 @@ namespace LeanCloud.Engine
             return cloud;
         }
 
+        public static Cloud Define<T1, T2, R>(this Cloud cloud, string functionName, Func<T1, T2, R> function)
+        {
+            cloud.Define(functionName, (context) =>
+            {
+                var pList = context.FunctionParameters.Values.ToList();
+                var result = function((T1)pList[0], (T2)pList[1]);
+                context.Result = result;
+                return Task.FromResult(context);
+            });
+            return cloud;
+        }
+
         public static Cloud OnVerifiedSMS(this Cloud cloud, Func<AVUser, Task> func)
         {
             cloud.OnVerified("sms", context =>

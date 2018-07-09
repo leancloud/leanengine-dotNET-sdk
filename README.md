@@ -1,6 +1,6 @@
 # LeanEngine dotNET sdk
 
-LeanEngine SDK for .NET Core 源码和相关实例项目，它支持开发者可以将自己的 .NET Core 项目部署到云引擎中。
+LeanEngine SDK for .NET Core 源码和相关实例项目，它支持开发者可以将自己的 .NET Core 项目部署到云引擎中。
 
 ## 将自己的 .NET Core 项目部署到云引擎
 

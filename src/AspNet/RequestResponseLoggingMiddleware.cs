@@ -4,7 +4,6 @@ using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.Internal;
 using Newtonsoft.Json;
 
 namespace LeanCloud.Engine

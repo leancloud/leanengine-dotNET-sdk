@@ -35,6 +35,5 @@
   <ItemGroup>
     <Folder Include="Cloud\" />
     <Folder Include="Attributes\" />
-    <Folder Include="Internal\" />
   </ItemGroup>
 </Project>

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -20,6 +21,21 @@ namespace LeanCloud.Engine.NetCore.UnitTest
             });
 
             cloud.Start();
+        }
+
+        [Fact]
+        public void ThrowExeception()
+        {
+            
+        }
+
+        [Fact]
+        public async Task CallFunction()
+        {
+            await AVCloud.CallFunctionAsync<double>("AverageStars", new Dictionary<string, object>()
+            {
+                { "movieName", "夏洛特烦恼" }
+            });
         }
     }
 }

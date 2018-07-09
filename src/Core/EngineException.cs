@@ -13,6 +13,11 @@ namespace LeanCloud.Engine
 
         }
 
+        public EngineException(int errorCode, string message) : this(message)
+        {
+            ErrorCode = errorCode;
+        }
+
         public int ErrorCode { get; set; }
 
         public int HttpStatusCode { get; set; }
