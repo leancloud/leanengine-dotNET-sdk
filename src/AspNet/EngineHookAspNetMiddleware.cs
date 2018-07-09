@@ -458,6 +458,7 @@ namespace LeanCloud.Engine
                         TheObject = theObject,
                         MetaBody = data,
                         By = by,
+                        UpdatedKeys = updatedKeys
                     };
                     await cloudInstance.InvokeClassHook(className, hookName, engineContext);
                     await context.Response.WriteAsync(engineContext.TheObject);
