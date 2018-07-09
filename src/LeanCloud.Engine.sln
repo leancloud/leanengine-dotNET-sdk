@@ -1,0 +1,50 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LeanCloud.Engine.Middleware.AspNetCore", "AspNet\LeanCloud.Engine.Middleware.AspNetCore.csproj", "{6497534C-BCE1-4FF1-8CF9-3BF57BAD5221}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Smaple", "Smaple", "{1D31A919-27E8-4303-9AF6-15AE88326757}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LeanCloud.Engine.Sample.ConsoleAppHosting.NetCore", "..\test\LeanCloud.Engine.Sample.ConsoleAppHosting.NetCore\LeanCloud.Engine.Sample.ConsoleAppHosting.NetCore.csproj", "{CCAC39EE-1D7C-4EB5-9CBF-942335453C3A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LeanCloud.Engine", "Core\LeanCloud.Engine.csproj", "{D198647A-1103-451A-9836-BE1532E19379}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LeanCloud.Engine.Sample.AspNetHosting.NetCore", "..\test\LeanCloud.Engine.AspNetDemo\LeanCloud.Engine.Sample.AspNetHosting.NetCore.csproj", "{A8EEECFF-1274-49FD-825C-0B2932F6F838}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{EA5D1215-A78A-4CF1-92A9-6046D4B3A01A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LeanCloud.Engine.NetCore.UnitTest", "..\test\LeanCloud.Engine.NetCore.UnitTest\LeanCloud.Engine.NetCore.UnitTest.csproj", "{148DD5FA-E503-4FAB-9C45-0803B133351D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6497534C-BCE1-4FF1-8CF9-3BF57BAD5221}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6497534C-BCE1-4FF1-8CF9-3BF57BAD5221}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6497534C-BCE1-4FF1-8CF9-3BF57BAD5221}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6497534C-BCE1-4FF1-8CF9-3BF57BAD5221}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CCAC39EE-1D7C-4EB5-9CBF-942335453C3A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CCAC39EE-1D7C-4EB5-9CBF-942335453C3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CCAC39EE-1D7C-4EB5-9CBF-942335453C3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CCAC39EE-1D7C-4EB5-9CBF-942335453C3A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D198647A-1103-451A-9836-BE1532E19379}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D198647A-1103-451A-9836-BE1532E19379}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D198647A-1103-451A-9836-BE1532E19379}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D198647A-1103-451A-9836-BE1532E19379}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A8EEECFF-1274-49FD-825C-0B2932F6F838}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A8EEECFF-1274-49FD-825C-0B2932F6F838}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A8EEECFF-1274-49FD-825C-0B2932F6F838}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A8EEECFF-1274-49FD-825C-0B2932F6F838}.Release|Any CPU.Build.0 = Release|Any CPU
+		{148DD5FA-E503-4FAB-9C45-0803B133351D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{148DD5FA-E503-4FAB-9C45-0803B133351D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{148DD5FA-E503-4FAB-9C45-0803B133351D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{148DD5FA-E503-4FAB-9C45-0803B133351D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{CCAC39EE-1D7C-4EB5-9CBF-942335453C3A} = {1D31A919-27E8-4303-9AF6-15AE88326757}
+		{A8EEECFF-1274-49FD-825C-0B2932F6F838} = {1D31A919-27E8-4303-9AF6-15AE88326757}
+		{148DD5FA-E503-4FAB-9C45-0803B133351D} = {EA5D1215-A78A-4CF1-92A9-6046D4B3A01A}
+	EndGlobalSection
+EndGlobal
