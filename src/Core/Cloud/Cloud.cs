@@ -16,7 +16,6 @@ namespace LeanCloud.Engine
     /// </summary>
     public delegate Task EngineObjectHookDelegate(AVObject theObject);
 
-
     /// <summary>
     /// Engine object with user hook delegate.
     /// </summary>
@@ -252,7 +251,7 @@ namespace LeanCloud.Engine
         /// Queries the cloud functions meta data async.
         /// </summary>
         /// <returns>The cloud functions meta data async.</returns>
-        public Task<IEnumerable<string>> QueryCloudFunctionsMetaDataAsync()
+        public virtual Task<IEnumerable<string>> QueryCloudFunctionsMetaDataAsync()
         {
             var hookMetaNames = Hooks.Count != 0 ? Hooks.Keys as IEnumerable<string> : new string[] { } as IEnumerable<string>;
 

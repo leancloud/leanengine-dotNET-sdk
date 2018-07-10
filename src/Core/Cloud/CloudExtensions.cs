@@ -10,7 +10,7 @@ namespace LeanCloud.Engine
 {
     public static class ICloudExtensions
     {
-        public static Cloud UseClassHook(this Cloud cloud, string className, EngineHookType hookType, EngineHookDelegate hookDelegate)
+        public static Cloud UseHook(this Cloud cloud, string className, EngineHookType hookType, EngineHookDelegate hookDelegate)
         {
             switch (hookType)
             {
@@ -40,45 +40,45 @@ namespace LeanCloud.Engine
 
         public static Cloud BeforeSave(this Cloud cloud, string className, EngineHookDelegate hookDelegate)
         {
-            cloud.UseClassHook(className, EngineHookType.BeforeSave, hookDelegate);
+            cloud.UseHook(className, EngineHookType.BeforeSave, hookDelegate);
             return cloud;
         }
 
         public static Cloud AfterSave(this Cloud cloud, string className, EngineHookDelegate hookDelegate)
         {
-            cloud.UseClassHook(className, EngineHookType.AfterSave, hookDelegate);
+            cloud.UseHook(className, EngineHookType.AfterSave, hookDelegate);
             return cloud;
         }
 
         public static Cloud BeforeUpdate(this Cloud cloud, string className, EngineHookDelegate hookDelegate)
         {
-            cloud.UseClassHook(className, EngineHookType.BeforeUpdate, hookDelegate);
+            cloud.UseHook(className, EngineHookType.BeforeUpdate, hookDelegate);
             return cloud;
         }
 
         public static Cloud AfterUpdate(this Cloud cloud, string className, EngineHookDelegate hookDelegate)
         {
-            cloud.UseClassHook(className, EngineHookType.AfterUpdate, hookDelegate);
+            cloud.UseHook(className, EngineHookType.AfterUpdate, hookDelegate);
             return cloud;
         }
 
         public static Cloud BeforeDelete(this Cloud cloud, string className, EngineHookDelegate hookDelegate)
         {
-            cloud.UseClassHook(className, EngineHookType.BeforeDelete, hookDelegate);
+            cloud.UseHook(className, EngineHookType.BeforeDelete, hookDelegate);
             return cloud;
         }
 
         public static Cloud AfterDelete(this Cloud cloud, string className, EngineHookDelegate hookDelegate)
         {
-            cloud.UseClassHook(className, EngineHookType.AfterDelete, hookDelegate);
+            cloud.UseHook(className, EngineHookType.AfterDelete, hookDelegate);
             return cloud;
         }
 
         #region seperate TheObject with context in delegate
 
-        public static Cloud UseClassHook(this Cloud cloud, string className, EngineHookType hookType, EngineObjectHookDelegate hookDelegate)
+        public static Cloud UseHook(this Cloud cloud, string className, EngineHookType hookType, EngineObjectHookDelegate hookDelegate)
         {
-            cloud.UseClassHook(className, hookType, (EngineObjectHookContext context) =>
+            cloud.UseHook(className, hookType, (EngineObjectHookContext context) =>
             {
                 return hookDelegate(context.TheObject);
             });
@@ -87,46 +87,46 @@ namespace LeanCloud.Engine
 
         public static Cloud BeforeSave(this Cloud cloud, string className, EngineObjectHookDelegate hookDelegate)
         {
-            cloud.UseClassHook(className, EngineHookType.BeforeSave, hookDelegate);
+            cloud.UseHook(className, EngineHookType.BeforeSave, hookDelegate);
             return cloud;
         }
 
         public static Cloud AfterSave(this Cloud cloud, string className, EngineObjectHookDelegate hookDelegate)
         {
-            cloud.UseClassHook(className, EngineHookType.AfterSave, hookDelegate);
+            cloud.UseHook(className, EngineHookType.AfterSave, hookDelegate);
             return cloud;
         }
 
         public static Cloud BeforeUpdate(this Cloud cloud, string className, EngineObjectHookDelegate hookDelegate)
         {
-            cloud.UseClassHook(className, EngineHookType.BeforeUpdate, hookDelegate);
+            cloud.UseHook(className, EngineHookType.BeforeUpdate, hookDelegate);
             return cloud;
         }
 
         public static Cloud AfterUpdate(this Cloud cloud, string className, EngineObjectHookDelegate hookDelegate)
         {
-            cloud.UseClassHook(className, EngineHookType.AfterUpdate, hookDelegate);
+            cloud.UseHook(className, EngineHookType.AfterUpdate, hookDelegate);
             return cloud;
         }
 
         public static Cloud BeforeDelete(this Cloud cloud, string className, EngineObjectHookDelegate hookDelegate)
         {
-            cloud.UseClassHook(className, EngineHookType.BeforeDelete, hookDelegate);
+            cloud.UseHook(className, EngineHookType.BeforeDelete, hookDelegate);
             return cloud;
         }
 
         public static Cloud AfterDelete(this Cloud cloud, string className, EngineObjectHookDelegate hookDelegate)
         {
-            cloud.UseClassHook(className, EngineHookType.AfterDelete, hookDelegate);
+            cloud.UseHook(className, EngineHookType.AfterDelete, hookDelegate);
             return cloud;
         }
 
         #endregion
 
         #region passing current user
-        public static Cloud UseClassHook(this Cloud cloud, string className, EngineHookType hookType, EngineObjectWithUserHookDelegate hookDelegate)
+        public static Cloud UseHook(this Cloud cloud, string className, EngineHookType hookType, EngineObjectWithUserHookDelegate hookDelegate)
         {
-            cloud.UseClassHook(className, hookType, (EngineObjectHookContext context) =>
+            cloud.UseHook(className, hookType, (EngineObjectHookContext context) =>
             {
                 return hookDelegate(context.TheObject, context.By);
             });
@@ -135,46 +135,46 @@ namespace LeanCloud.Engine
 
         public static Cloud BeforeSave(this Cloud cloud, string className, EngineObjectWithUserHookDelegate hookDelegate)
         {
-            cloud.UseClassHook(className, EngineHookType.BeforeSave, hookDelegate);
+            cloud.UseHook(className, EngineHookType.BeforeSave, hookDelegate);
             return cloud;
         }
 
         public static Cloud AfterSave(this Cloud cloud, string className, EngineObjectWithUserHookDelegate hookDelegate)
         {
-            cloud.UseClassHook(className, EngineHookType.AfterSave, hookDelegate);
+            cloud.UseHook(className, EngineHookType.AfterSave, hookDelegate);
             return cloud;
         }
 
         public static Cloud BeforeUpdate(this Cloud cloud, string className, EngineObjectWithUserHookDelegate hookDelegate)
         {
-            cloud.UseClassHook(className, EngineHookType.BeforeUpdate, hookDelegate);
+            cloud.UseHook(className, EngineHookType.BeforeUpdate, hookDelegate);
             return cloud;
         }
 
         public static Cloud AfterUpdate(this Cloud cloud, string className, EngineObjectWithUserHookDelegate hookDelegate)
         {
-            cloud.UseClassHook(className, EngineHookType.AfterUpdate, hookDelegate);
+            cloud.UseHook(className, EngineHookType.AfterUpdate, hookDelegate);
             return cloud;
         }
 
         public static Cloud BeforeDelete(this Cloud cloud, string className, EngineObjectWithUserHookDelegate hookDelegate)
         {
-            cloud.UseClassHook(className, EngineHookType.BeforeDelete, hookDelegate);
+            cloud.UseHook(className, EngineHookType.BeforeDelete, hookDelegate);
             return cloud;
         }
 
         public static Cloud AfterDelete(this Cloud cloud, string className, EngineObjectWithUserHookDelegate hookDelegate)
         {
-            cloud.UseClassHook(className, EngineHookType.AfterDelete, hookDelegate);
+            cloud.UseHook(className, EngineHookType.AfterDelete, hookDelegate);
             return cloud;
         }
         #endregion
 
         #region generic sub-class hook
-        public static Cloud UseClassHook<TAVObject>(this Cloud cloud, EngineHookType hookType, EngineObjectHookDelegate<TAVObject> hookDelegate) where TAVObject : AVObject
+        public static Cloud UseHook<TAVObject>(this Cloud cloud, EngineHookType hookType, EngineObjectHookDelegate<TAVObject> hookDelegate) where TAVObject : AVObject
         {
             var className = AVObject.GetSubClassName<TAVObject>();
-            cloud.UseClassHook(className, hookType, (EngineObjectHookContext context) =>
+            cloud.UseHook(className, hookType, (EngineObjectHookContext context) =>
              {
                  return hookDelegate(context.TheObject as TAVObject);
              });
@@ -183,45 +183,45 @@ namespace LeanCloud.Engine
 
         public static Cloud BeforeSave<TAVObject>(this Cloud cloud, EngineObjectHookDelegate<TAVObject> hookDelegate) where TAVObject : AVObject
         {
-            cloud.UseClassHook<TAVObject>(EngineHookType.BeforeSave, hookDelegate);
+            cloud.UseHook(EngineHookType.BeforeSave, hookDelegate);
             return cloud;
         }
         public static Cloud AfterSave<TAVObject>(this Cloud cloud, EngineObjectHookDelegate<TAVObject> hookDelegate) where TAVObject : AVObject
         {
-            cloud.UseClassHook<TAVObject>(EngineHookType.AfterSave, hookDelegate);
+            cloud.UseHook(EngineHookType.AfterSave, hookDelegate);
             return cloud;
         }
 
         public static Cloud BeforeUpdate<TAVObject>(this Cloud cloud, EngineObjectHookDelegate<TAVObject> hookDelegate) where TAVObject : AVObject
         {
-            cloud.UseClassHook<TAVObject>(EngineHookType.BeforeUpdate, hookDelegate);
+            cloud.UseHook(EngineHookType.BeforeUpdate, hookDelegate);
             return cloud;
         }
 
         public static Cloud AfterUpdate<TAVObject>(this Cloud cloud, EngineObjectHookDelegate<TAVObject> hookDelegate) where TAVObject : AVObject
         {
-            cloud.UseClassHook<TAVObject>(EngineHookType.AfterUpdate, hookDelegate);
+            cloud.UseHook(EngineHookType.AfterUpdate, hookDelegate);
             return cloud;
         }
 
         public static Cloud BeforeDelete<TAVObject>(this Cloud cloud, EngineObjectHookDelegate<TAVObject> hookDelegate) where TAVObject : AVObject
         {
-            cloud.UseClassHook<TAVObject>(EngineHookType.BeforeDelete, hookDelegate);
+            cloud.UseHook(EngineHookType.BeforeDelete, hookDelegate);
             return cloud;
         }
 
         public static Cloud AfterDelete<TAVObject>(this Cloud cloud, EngineObjectHookDelegate<TAVObject> hookDelegate) where TAVObject : AVObject
         {
-            cloud.UseClassHook<TAVObject>(EngineHookType.AfterDelete, hookDelegate);
+            cloud.UseHook(EngineHookType.AfterDelete, hookDelegate);
             return cloud;
         }
         #endregion
 
         #region generic sub-class hook with AVUser
-        public static Cloud UseClassHook<TAVObject>(this Cloud cloud, EngineHookType hookType, EngineObjectWithUserHookDelegate<TAVObject> hookDelegate) where TAVObject : AVObject
+        public static Cloud UseHook<TAVObject>(this Cloud cloud, EngineHookType hookType, EngineObjectWithUserHookDelegate<TAVObject> hookDelegate) where TAVObject : AVObject
         {
             var className = AVObject.GetSubClassName<TAVObject>();
-            cloud.UseClassHook(className, hookType, (EngineObjectHookContext context) =>
+            cloud.UseHook(className, hookType, (EngineObjectHookContext context) =>
             {
                 return hookDelegate(context.TheObject as TAVObject, context.By);
             });
@@ -230,48 +230,53 @@ namespace LeanCloud.Engine
 
         public static Cloud BeforeSave<TAVObject>(this Cloud cloud, EngineObjectWithUserHookDelegate<TAVObject> hookDelegate) where TAVObject : AVObject
         {
-            cloud.UseClassHook<TAVObject>(EngineHookType.BeforeSave, hookDelegate);
+            cloud.UseHook(EngineHookType.BeforeSave, hookDelegate);
             return cloud;
         }
+
         public static Cloud AfterSave<TAVObject>(this Cloud cloud, EngineObjectWithUserHookDelegate<TAVObject> hookDelegate) where TAVObject : AVObject
         {
-            cloud.UseClassHook<TAVObject>(EngineHookType.AfterSave, hookDelegate);
+            cloud.UseHook(EngineHookType.AfterSave, hookDelegate);
             return cloud;
         }
+
         public static Cloud BeforeUpdate<TAVObject>(this Cloud cloud, EngineObjectWithUserHookDelegate<TAVObject> hookDelegate) where TAVObject : AVObject
         {
-            cloud.UseClassHook<TAVObject>(EngineHookType.BeforeUpdate, hookDelegate);
+            cloud.UseHook(EngineHookType.BeforeUpdate, hookDelegate);
             return cloud;
         }
+
         public static Cloud AfterUpdate<TAVObject>(this Cloud cloud, EngineObjectWithUserHookDelegate<TAVObject> hookDelegate) where TAVObject : AVObject
         {
-            cloud.UseClassHook<TAVObject>(EngineHookType.AfterUpdate, hookDelegate);
+            cloud.UseHook(EngineHookType.AfterUpdate, hookDelegate);
             return cloud;
         }
+
         public static Cloud BeforeDelete<TAVObject>(this Cloud cloud, EngineObjectWithUserHookDelegate<TAVObject> hookDelegate) where TAVObject : AVObject
         {
-            cloud.UseClassHook<TAVObject>(EngineHookType.BeforeDelete, hookDelegate);
+            cloud.UseHook(EngineHookType.BeforeDelete, hookDelegate);
             return cloud;
         }
+
         public static Cloud AfterDelete<TAVObject>(this Cloud cloud, EngineObjectWithUserHookDelegate<TAVObject> hookDelegate) where TAVObject : AVObject
         {
-            cloud.UseClassHook<TAVObject>(EngineHookType.AfterDelete, hookDelegate);
+            cloud.UseHook(EngineHookType.AfterDelete, hookDelegate);
             return cloud;
         }
         #endregion
 
-        public static Cloud UseClassHook<THookClass>(this Cloud cloud) where THookClass : class
+        public static Cloud UseHookClass<THookClass>(this Cloud cloud) where THookClass : class
         {
-            cloud.UseClassHook<THookClass>(default(THookClass));
+            cloud.UseHookClass(default(THookClass));
             return cloud;
         }
 
-        public static Cloud UseClassHook<THookClass>(this Cloud cloud, THookClass hook = null) where THookClass : class
+        public static Cloud UseHookClass<THookClass>(this Cloud cloud, THookClass hook = null) where THookClass : class
         {
             var tupple = ReflectHooks<THookClass>(hook);
             tupple.ForEach(t =>
             {
-                cloud.UseClassHook(t.Item1, t.Item2, t.Item3);
+                cloud.UseHook(t.Item1, t.Item2, t.Item3);
             });
             return cloud;
         }
@@ -288,7 +293,41 @@ namespace LeanCloud.Engine
                 {
                     var hookAttribute = (EngineObjectHookAttribute)hookAttributes[0];
 
-                    var del = method.IsStatic ? (EngineHookDelegate)Delegate.CreateDelegate(typeof(EngineHookDelegate), method) : (EngineHookDelegate)Delegate.CreateDelegate(typeof(EngineHookDelegate), hook ?? Activator.CreateInstance<THookClass>(), method);
+                    var parametersArray = method.GetParameters();
+                    EngineHookDelegate del = null;
+                    if (parametersArray.Count() == 1)
+                    {
+                        var theParameterType = parametersArray[0].ParameterType;
+                        if (theParameterType == typeof(AVObject))
+                        {
+                            var objectDel = method.IsStatic ? (EngineObjectHookDelegate)Delegate.CreateDelegate(typeof(EngineObjectHookDelegate), method) : (EngineObjectHookDelegate)Delegate.CreateDelegate(typeof(EngineObjectHookDelegate), hook ?? Activator.CreateInstance<THookClass>(), method);
+                            del = (context) =>
+                            {
+                                return objectDel(context.TheObject);
+                            };
+                        }
+                        else if (theParameterType == typeof(EngineObjectHookContext))
+                        {
+                            del = method.IsStatic ? (EngineHookDelegate)Delegate.CreateDelegate(typeof(EngineHookDelegate), method) : (EngineHookDelegate)Delegate.CreateDelegate(typeof(EngineHookDelegate), hook ?? Activator.CreateInstance<THookClass>(), method);
+                        }
+                    }
+                    else if (parametersArray.Count() == 2)
+                    {
+                        var firstParameterType = parametersArray[0].ParameterType;
+                        var secondParameterType = parametersArray[1].ParameterType;
+                        if (firstParameterType == typeof(AVObject) && secondParameterType == typeof(AVUser))
+                        {
+                            var objectUserDel = method.IsStatic ? (EngineObjectWithUserHookDelegate)Delegate.CreateDelegate(typeof(EngineObjectWithUserHookDelegate), method) : (EngineObjectWithUserHookDelegate)Delegate.CreateDelegate(typeof(EngineObjectWithUserHookDelegate), hook ?? Activator.CreateInstance<THookClass>(), method);
+                            del = (context) =>
+                            {
+                                return objectUserDel(context.TheObject, context.By);
+                            };
+                        }
+                    }
+                    else
+                    {
+                        throw new EngineException(-1, "parameters not supported. Please define your method like foo(AVObject obj) or foo(AVObject obj, AVUser user) or foo(EngineObjectHookContext context).");
+                    }
                     var mixedResult = (hookAttribute.ClassName, hookAttribute.HookType, del);
                     tupple.Add(mixedResult);
                 }

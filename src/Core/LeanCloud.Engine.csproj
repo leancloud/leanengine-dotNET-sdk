@@ -16,6 +16,7 @@
     <Compile Remove="LeanCloud.Engine.AspNet.Core\Class1.cs" />
     <Compile Remove="LeanEngine.cs" />
     <Compile Remove="ILeanEngine.cs" />
+    <Compile Remove="EngineReponse.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Runtime">
@@ -35,5 +36,6 @@
   <ItemGroup>
     <Folder Include="Cloud\" />
     <Folder Include="Attributes\" />
+    <Folder Include="Context\" />
   </ItemGroup>
 </Project>
