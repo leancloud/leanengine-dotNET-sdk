@@ -42,15 +42,23 @@ namespace LeanCloud.Engine
         public async Task Invoke(HttpContext context)
         {
             await new RequestResponseLoggingMiddleware(_next).PrintRequest(context);
+            var doRedirect = true;
             if (EngineAspNetMiddleware.ProxyTrusted)
             {
                 var proxyHeader = context.GetRequestHeader("x-forwarded-proto");
-                if (proxyHeader.ToLower() == "http")
+                if (!string.IsNullOrEmpty(proxyHeader))
                 {
-                    await _next(context);
+                    if (proxyHeader.ToLower() == "http")
+                    {
+                        doRedirect = false;
+                    }
                 }
             }
-            else if ((EngineAspNetMiddleware.hostingCloud.IsProduction || context.Request.Host.Value.EndsWith(".leanapp.cn", StringComparison.Ordinal)) && !context.Request.IsHttps)
+            else if (doRedirect && (EngineAspNetMiddleware.hostingCloud.IsProduction || context.Request.Host.Value.EndsWith(".leanapp.cn", StringComparison.Ordinal)) && !context.Request.IsHttps)
+            {
+                doRedirect = true;
+            }
+            if (doRedirect)
             {
                 await RedirectToHttps(context);
             }
