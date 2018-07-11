@@ -48,7 +48,7 @@ namespace LeanCloud.Engine
                 var proxyHeader = context.GetRequestHeader("x-forwarded-proto");
                 if (!string.IsNullOrEmpty(proxyHeader))
                 {
-                    if (proxyHeader.ToLower() == "http")
+                    if (proxyHeader.ToLower() == "https")
                     {
                         doRedirect = false;
                     }
