@@ -29,7 +29,7 @@ namespace LeanCloud.Engine
         {
             if ((EngineAspNetMiddleware.hostingCloud.IsProduction || context.Request.Host.Value.EndsWith(".leanapp.cn", StringComparison.Ordinal)) && !context.Request.IsHttps)
             {
-                var url = $"https://${context.Request.Host}${context.Request.Path}";
+                var url = $"https://{context.Request.Host}{context.Request.Path}";
                 context.Response.StatusCode = 302;
                 context.Response.Headers.Add("Location", url);
 
