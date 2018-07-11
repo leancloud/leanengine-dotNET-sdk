@@ -21,6 +21,20 @@ namespace LeanCloud.Engine
         }
 
         /// <summary>
+        /// redirect https.
+        /// </summary>
+        /// <param name="context"></param>
+        /// <returns></returns>
+        public async Task RedirectToHttps(HttpContext context)
+        {
+            var url = $"https://{context.Request.Host}{context.Request.Path}";
+            context.Response.StatusCode = 302;
+            context.Response.Headers.Add("Location", url);
+
+            await context.Response.WriteAsync($"Found. Redirecting to ${url}");
+        }
+
+        /// <summary>
         /// Invoke the specified context.
         /// </summary>
         /// <returns>The invoke.</returns>
@@ -28,13 +42,17 @@ namespace LeanCloud.Engine
         public async Task Invoke(HttpContext context)
         {
             await new RequestResponseLoggingMiddleware(_next).PrintRequest(context);
-            if ((EngineAspNetMiddleware.hostingCloud.IsProduction || context.Request.Host.Value.EndsWith(".leanapp.cn", StringComparison.Ordinal)) && !context.Request.IsHttps)
+            if (EngineAspNetMiddleware.ProxyTrusted)
             {
-                var url = $"https://{context.Request.Host}{context.Request.Path}";
-                context.Response.StatusCode = 302;
-                context.Response.Headers.Add("Location", url);
-
-                await context.Response.WriteAsync($"Found. Redirecting to ${url}");
+                var proxyHeader = context.GetRequestHeader("x-forwarded-proto");
+                if (proxyHeader.ToLower() == "http")
+                {
+                    await _next(context);
+                }
+            }
+            else if ((EngineAspNetMiddleware.hostingCloud.IsProduction || context.Request.Host.Value.EndsWith(".leanapp.cn", StringComparison.Ordinal)) && !context.Request.IsHttps)
+            {
+                await RedirectToHttps(context);
             }
             else
             {

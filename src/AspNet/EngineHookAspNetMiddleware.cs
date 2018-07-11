@@ -235,6 +235,21 @@ namespace LeanCloud.Engine
             get => Environment.GetEnvironmentVariable("LEANCLOUD_APP_HOOK_KEY");
         }
 
+        internal static string GetRequestHeader(this HttpContext context, string key)
+        {
+            foreach (var kv in context.Request.Headers)
+            {
+                if (kv.Key.ToLower().Equals(key.ToLower()))
+                {
+                    if (kv.Value == HookKey)
+                    {
+                        return kv.Value;
+                    }
+                }
+            }
+            return null;
+        }
+
         private static bool ValidFromApi(this HttpContext context)
         {
             if (hostingCloud.IsDevelopment) return true;
@@ -371,6 +386,18 @@ namespace LeanCloud.Engine
         public static IApplicationBuilder UseHttpsRedirect(this IApplicationBuilder app)
         {
             app.UseMiddleware<EnforceHttpsMiddleware>();
+            return app;
+        }
+
+        internal static bool ProxyTrusted { get; set; }
+        /// <summary>
+        /// trust internal proxy http request.
+        /// </summary>
+        /// <param name="app"></param>
+        /// <returns></returns>
+        public static IApplicationBuilder TrustProxy(this IApplicationBuilder app)
+        {
+            ProxyTrusted = true;
             return app;
         }
 
