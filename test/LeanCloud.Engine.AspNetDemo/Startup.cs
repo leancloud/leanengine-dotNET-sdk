@@ -29,20 +29,17 @@ namespace LeanCloud.Engine.AspNetDemo
             }
 
             var routeBuilder = new RouteBuilder(app);
+
             routeBuilder.MapGet("/", async context =>
             {
-                await context.Response.WriteAsync("hello, dotnet running on LeanEngine now.");
+                await context.Response.WriteAsync("hello, dotnet is running on LeanEngine now.");
             });
 
-            //
-
-            //var myCloud = new MyCloud();
-            //app.UseCloud((Cloud)myCloud);
-            //myCloud.Start();
             var cloud = new Cloud().EquipFunctions();
             app.UseCloud(cloud);
             app.UseHttpsRedirect();
             cloud.Start();
+
             var routes = routeBuilder.Build();
             app.UseRouter(routes);
 

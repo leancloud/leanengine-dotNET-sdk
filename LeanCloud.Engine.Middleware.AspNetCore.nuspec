@@ -16,7 +16,7 @@
         <tags>LeanCloud paas baas storage cloud</tags>
         <dependencies>
             <dependency id="LeanCloud.Engine" version="2018.7.10.1" />
-            <dependency id="Microsoft.AspNetCore" version="2.1.1" />
+            <dependency id="Microsoft.AspNetCore" version="2.1.0" />
         </dependencies>
     </metadata>
     <files>
