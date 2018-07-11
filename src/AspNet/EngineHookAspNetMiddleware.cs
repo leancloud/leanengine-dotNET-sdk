@@ -241,10 +241,7 @@ namespace LeanCloud.Engine
             {
                 if (kv.Key.ToLower().Equals(key.ToLower()))
                 {
-                    if (kv.Value == HookKey)
-                    {
-                        return kv.Value;
-                    }
+                    return kv.Value;
                 }
             }
             return null;
