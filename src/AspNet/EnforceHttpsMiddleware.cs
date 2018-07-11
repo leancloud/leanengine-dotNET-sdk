@@ -54,7 +54,7 @@ namespace LeanCloud.Engine
                     }
                 }
             }
-            else if (doRedirect && (EngineAspNetMiddleware.hostingCloud.IsProduction || context.Request.Host.Value.EndsWith(".leanapp.cn", StringComparison.Ordinal)) && !context.Request.IsHttps)
+            if (doRedirect && (EngineAspNetMiddleware.hostingCloud.IsProduction || context.Request.Host.Value.EndsWith(".leanapp.cn", StringComparison.Ordinal)) && !context.Request.IsHttps)
             {
                 doRedirect = true;
             }
