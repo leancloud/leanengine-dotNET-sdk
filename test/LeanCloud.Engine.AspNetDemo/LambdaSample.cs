@@ -10,7 +10,7 @@ namespace LeanCloud.Engine.AspNetDemo
         public static void UseLambda(this Cloud cloud)
         {
             // case 1. use EngineObjectHookContext
-            cloud.UseClassHook("Todo", EngineHookType.BeforeSave, (context) =>
+            cloud.UseHook("Todo", EngineHookType.BeforeSave, (context) =>
             {
                 var todo = context.TheObject;
                 var by = context.By;
@@ -23,7 +23,7 @@ namespace LeanCloud.Engine.AspNetDemo
             });
 
             // case 2. use TheObject
-            cloud.UseClassHook("Todo", EngineHookType.BeforeSave, (AVObject todoObj) =>
+            cloud.UseHook("Todo", EngineHookType.BeforeSave, (AVObject todoObj) =>
             {
                 return Task.FromResult(todoObj);
             });
@@ -34,7 +34,7 @@ namespace LeanCloud.Engine.AspNetDemo
             });
 
             // case 3. use TheObject and user
-            cloud.UseClassHook("Todo", EngineHookType.BeforeSave, (AVObject todoObj, AVUser by) =>
+            cloud.UseHook("Todo", EngineHookType.BeforeSave, (AVObject todoObj, AVUser by) =>
             {
                 return Task.FromResult(todoObj);
             });
@@ -47,13 +47,13 @@ namespace LeanCloud.Engine.AspNetDemo
             // case 3. use sub-class
             AVObject.RegisterSubclass<Todo>();
 
-            cloud.UseClassHook<Todo>(EngineHookType.BeforeSave, (Todo theTodoObj) =>
+            cloud.UseHook<Todo>(EngineHookType.BeforeSave, (Todo theTodoObj) =>
             {
                 // theTodoObj is an Todo instance.
                 return Task.FromResult(theTodoObj);
             });
 
-            cloud.UseClassHook<Todo>(EngineHookType.BeforeSave, (Todo theTodoObj, AVUser by) =>
+            cloud.UseHook<Todo>(EngineHookType.BeforeSave, (Todo theTodoObj, AVUser by) =>
             {
                 return Task.FromResult(theTodoObj);
             });

@@ -9,7 +9,7 @@ namespace LeanCloud.Engine.AspNetDemo
         public static Cloud SetHooks(this Cloud cloud)
         {
             cloud.BeforeSave("Todo", SampleHooks.Singleton.CheckTitle);
-            cloud.UseClassHook<TodoHook>();
+            cloud.UseHookClass<TodoHook>();
             return cloud;
         }
     }

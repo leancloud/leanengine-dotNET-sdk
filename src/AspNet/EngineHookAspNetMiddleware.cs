@@ -137,7 +137,7 @@ namespace LeanCloud.Engine
             return cloud;
         }
 
-        private static Cloud cloudInstance;
+        internal static Cloud hostingCloud;
 
         /// <summary>
         /// Uses the default homepage.
@@ -165,7 +165,7 @@ namespace LeanCloud.Engine
         /// <param name="cloud">Cloud.</param>
         public static IApplicationBuilder UseCloud(this IApplicationBuilder app, Cloud cloud)
         {
-            cloudInstance = cloud;
+            hostingCloud = cloud;
 
             var routeBuilder = new RouteBuilder(app);
 
@@ -213,7 +213,7 @@ namespace LeanCloud.Engine
 
         private static bool ValidFromApi(this HttpContext context)
         {
-            if (cloudInstance.IsDevelopment) return true;
+            if (hostingCloud.IsDevelopment) return true;
             var hookKeyKeyInLower = "x-lc-hook-key";
             foreach (var kv in context.Request.Headers)
             {
@@ -340,6 +340,17 @@ namespace LeanCloud.Engine
         }
 
         /// <summary>
+        /// Uses the https redirect.
+        /// </summary>
+        /// <returns>The https redirect.</returns>
+        /// <param name="app">App.</param>
+        public static IApplicationBuilder UseHttpsRedirect(this IApplicationBuilder app)
+        {
+            app.UseMiddleware<EnforceHttpsMiddleware>();
+            return app;
+        }
+
+        /// <summary>
         /// Pong the specified context.
         /// </summary>
         /// <returns>The pong.</returns>
@@ -377,7 +388,7 @@ namespace LeanCloud.Engine
                 };
                 try
                 {
-                    await cloudInstance.Invoke(funcName, funcOrRpc, engineContext);
+                    await hostingCloud.Invoke(funcName, funcOrRpc, engineContext);
                     var resultWrapper = new Dictionary<string, object>()
                     {
                         { "result", engineContext.Result }
@@ -406,7 +417,7 @@ namespace LeanCloud.Engine
         /// <param name="context">Context.</param>
         public static async Task ResponseFunctionList(HttpContext context)
         {
-            var functionNames = await cloudInstance.QueryCloudFunctionsMetaDataAsync();
+            var functionNames = await hostingCloud.QueryCloudFunctionsMetaDataAsync();
             var resultWrapper = new Dictionary<string, object>()
              {
                 { "result", functionNames }
@@ -460,7 +471,7 @@ namespace LeanCloud.Engine
                         By = by,
                         UpdatedKeys = updatedKeys
                     };
-                    await cloudInstance.InvokeClassHook(className, hookName, engineContext);
+                    await hostingCloud.InvokeClassHook(className, hookName, engineContext);
                     await context.Response.WriteAsync(engineContext.TheObject);
                 }
             }
@@ -483,7 +494,7 @@ namespace LeanCloud.Engine
                 {
                     TheUser = AVObject.FromState<AVUser>(objectState, "_User")
                 };
-                var t = cloudInstance.Invoke(verifiedField, engineContext);
+                var t = hostingCloud.Invoke(verifiedField, engineContext);
                 await HandleResult(context, t);
             }
         }
@@ -506,7 +517,7 @@ namespace LeanCloud.Engine
                     TheUser = AVObject.FromState<AVUser>(objectState, "_User"),
                     Action = action
                 };
-                var t = cloudInstance.Invoke(action, engineContext);
+                var t = hostingCloud.Invoke(action, engineContext);
                 await HandleResult(context, t);
             }
         }

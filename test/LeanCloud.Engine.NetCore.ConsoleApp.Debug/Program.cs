@@ -6,7 +6,7 @@ namespace LeanCloud.Engine.NetCore.ConsoleApp.Debug
     {
         static void Main(string[] args)
         {
-            Cloud cloud = new Cloud().UseHookClass<TodoHook>();
+            Cloud cloud = new Cloud();
             cloud.Start();
         }
     }

@@ -3,7 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using LeanCloud.Core.Internal;
 
-namespace LeanCloud.Engine.NetCore.ConsoleApp.Debug
+namespace LeanCloud.Engine.Sample.ConsoleAppHosting.NetCore
 {
     public class TodoHook
     {
