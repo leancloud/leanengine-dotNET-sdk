@@ -125,6 +125,17 @@ namespace LeanCloud.Engine
             return webHostBuilder;
         }
 
+        /// <summary>
+        /// Uses the cloud.
+        /// </summary>
+        /// <returns>The cloud.</returns>
+        /// <param name="webHostBuilder">Web host builder.</param>
+        public static IWebHostBuilder UseCloud(this IWebHostBuilder webHostBuilder)
+        {
+            var cloud = new Cloud();
+            return webHostBuilder.UseCloud(cloud);
+        }
+
         private static bool toggleLog { get; set; }
         /// <summary>
         /// Uses the log.
@@ -204,6 +215,17 @@ namespace LeanCloud.Engine
             app.UseRouter(routes);
 
             return app;
+        }
+
+        /// <summary>
+        /// Uses the cloud.
+        /// </summary>
+        /// <returns>The cloud.</returns>
+        /// <param name="app">App.</param>
+        public static IApplicationBuilder UseCloud(this IApplicationBuilder app)
+        {
+            var cloud = new Cloud();
+            return app.UseCloud(cloud);
         }
 
         private static string HookKey
