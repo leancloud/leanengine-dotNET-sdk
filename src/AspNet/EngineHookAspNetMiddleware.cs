@@ -225,7 +225,9 @@ namespace LeanCloud.Engine
         public static IApplicationBuilder UseCloud(this IApplicationBuilder app)
         {
             var cloud = new Cloud();
-            return app.UseCloud(cloud);
+            app.UseCloud(cloud);
+            cloud.Start();
+            return app;
         }
 
         private static string HookKey

@@ -46,6 +46,16 @@ namespace LeanCloud.Engine
             }
         }
 
+        /// <summary>
+        /// print request to Console.
+        /// </summary>
+        /// <param name="context"></param>
+        /// <returns></returns>
+        public async Task PrintRequest(HttpContext context)
+        {
+            Console.WriteLine(await FormatRequest(context.Request));
+        }
+
         private async Task<string> FormatRequest(HttpRequest request)
         {
             using (var bodyStreamReader = new StreamReader(request.Body))
