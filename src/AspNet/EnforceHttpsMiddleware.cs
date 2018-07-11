@@ -27,6 +27,7 @@ namespace LeanCloud.Engine
         /// <param name="context">Context.</param>
         public async Task Invoke(HttpContext context)
         {
+            Console.WriteLine($"{context.Request.Scheme}://{context.Request.Host}{context.Request.Path} {context.Request.IsHttps}");
             if ((EngineAspNetMiddleware.hostingCloud.IsProduction || context.Request.Host.Value.EndsWith(".leanapp.cn", StringComparison.Ordinal)) && !context.Request.IsHttps)
             {
                 var url = $"https://{context.Request.Host}{context.Request.Path}";
