@@ -18,6 +18,15 @@ using LeanCloud.Storage.Internal;
 
 namespace LeanCloud.Engine
 {
+    public struct MiddlewareOptions
+    {
+        public bool TrustProxy { get; set; }
+
+        public bool HttpsRedirect { get; set; }
+
+        public bool Log { get; set; }
+    }
+
     /// <summary>
     /// Engine ASP net middleware.
     /// </summary>

@@ -36,8 +36,8 @@ namespace AspNetWebApi.Default
             }
 
             app.UseCloud();
-            app.UseLog();
             app.TrustProxy();
+            app.UseLog();
             app.UseHttpsRedirect();
 
             app.UseMvc();

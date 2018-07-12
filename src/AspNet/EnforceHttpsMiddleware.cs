@@ -54,6 +54,10 @@ namespace LeanCloud.Engine
             {
                 doRedirect = true;
             }
+            else
+            {
+                doRedirect = false;
+            }
             if (doRedirect)
             {
                 await RedirectToHttps(context);

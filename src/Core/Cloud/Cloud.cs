@@ -159,6 +159,11 @@ namespace LeanCloud.Engine
             }
         }
 
+        public string GetLeanCacheRedisConnectionString(string instanceName)
+        {
+            return Environment.GetEnvironmentVariable($"REDIS_URL_{instanceName}");
+        }
+
         public void PrintEnvironmentVariables()
         {
             foreach (LeanEnvKey key in (LeanEnvKey[])Enum.GetValues(typeof(LeanEnvKey)))
