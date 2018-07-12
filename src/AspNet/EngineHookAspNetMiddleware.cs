@@ -100,6 +100,8 @@ namespace LeanCloud.Engine
             return cloud.Start(webHostBuilder);
         }
 
+        #region webhost builder extensions
+
         /// <summary>
         /// Start the specified cloud and webHostBuilder.
         /// </summary>
@@ -136,19 +138,55 @@ namespace LeanCloud.Engine
             return webHostBuilder.UseCloud(cloud);
         }
 
-        private static bool toggleLog { get; set; }
         /// <summary>
         /// Uses the log.
         /// </summary>
         /// <returns>The log.</returns>
-        /// <param name="cloud">Cloud.</param>
-        public static Cloud UseLog(this Cloud cloud)
+        /// <param name="webHostBuilder">Web host builder.</param>
+        public static IWebHostBuilder UseLog(this IWebHostBuilder webHostBuilder)
         {
             toggleLog = true;
-            return cloud;
+            webHostBuilder.Configure(app =>
+            {
+                app.UseLog();
+            });
+            return webHostBuilder;
         }
 
+        /// <summary>
+        /// Trusts the proxy.
+        /// </summary>
+        /// <returns>The proxy.</returns>
+        /// <param name="webHostBuilder">Web host builder.</param>
+        public static IWebHostBuilder TrustProxy(this IWebHostBuilder webHostBuilder)
+        {
+            webHostBuilder.Configure(app =>
+            {
+                app.TrustProxy();
+            });
+            return webHostBuilder;
+        }
+
+        /// <summary>
+        /// Uses the https redirect.
+        /// </summary>
+        /// <returns>The https redirect.</returns>
+        /// <param name="webHostBuilder">Web host builder.</param>
+        public static IWebHostBuilder UseHttpsRedirect(this IWebHostBuilder webHostBuilder)
+        {
+            webHostBuilder.Configure(app =>
+            {
+                app.UseHttpsRedirect();
+            });
+            return webHostBuilder;
+        }
+
+        #endregion
+
         internal static Cloud hostingCloud;
+
+        #region application builder extensions
+
 
         /// <summary>
         /// Uses the default homepage.
@@ -229,6 +267,56 @@ namespace LeanCloud.Engine
             cloud.Start();
             return app;
         }
+
+        /// <summary>
+        /// Uses the log.
+        /// </summary>
+        /// <returns>The log.</returns>
+        /// <param name="app">App.</param>
+        public static IApplicationBuilder UseLog(this IApplicationBuilder app)
+        {
+            app.UseMiddleware<RequestResponseLoggingMiddleware>();
+            return app;
+        }
+
+        /// <summary>
+        /// Uses the https redirect.
+        /// </summary>
+        /// <returns>The https redirect.</returns>
+        /// <param name="app">App.</param>
+        public static IApplicationBuilder UseHttpsRedirect(this IApplicationBuilder app)
+        {
+            app.UseMiddleware<EnforceHttpsMiddleware>();
+            return app;
+        }
+
+        internal static bool ProxyTrusted { get; set; }
+        /// <summary>
+        /// trust internal proxy http request.
+        /// </summary>
+        /// <param name="app"></param>
+        /// <returns></returns>
+        public static IApplicationBuilder TrustProxy(this IApplicationBuilder app)
+        {
+            ProxyTrusted = true;
+            return app;
+        }
+
+        #endregion
+
+        private static bool toggleLog { get; set; }
+
+        /// <summary>
+        /// Uses the log.
+        /// </summary>
+        /// <returns>The log.</returns>
+        /// <param name="cloud">Cloud.</param>
+        public static Cloud UseLog(this Cloud cloud)
+        {
+            toggleLog = true;
+            return cloud;
+        }
+
 
         private static string HookKey
         {
@@ -362,40 +450,6 @@ namespace LeanCloud.Engine
             var encodedObjs = theObjectList.Select(theObject => theObject.Encode());
             var encodedStr = JsonConvert.SerializeObject(encodedObjs);
             return response.ContentTypeJson().WriteAsync(encodedStr);
-        }
-
-        /// <summary>
-        /// Uses the log.
-        /// </summary>
-        /// <returns>The log.</returns>
-        /// <param name="app">App.</param>
-        public static IApplicationBuilder UseLog(this IApplicationBuilder app)
-        {
-            app.UseMiddleware<RequestResponseLoggingMiddleware>();
-            return app;
-        }
-
-        /// <summary>
-        /// Uses the https redirect.
-        /// </summary>
-        /// <returns>The https redirect.</returns>
-        /// <param name="app">App.</param>
-        public static IApplicationBuilder UseHttpsRedirect(this IApplicationBuilder app)
-        {
-            app.UseMiddleware<EnforceHttpsMiddleware>();
-            return app;
-        }
-
-        internal static bool ProxyTrusted { get; set; }
-        /// <summary>
-        /// trust internal proxy http request.
-        /// </summary>
-        /// <param name="app"></param>
-        /// <returns></returns>
-        public static IApplicationBuilder TrustProxy(this IApplicationBuilder app)
-        {
-            ProxyTrusted = true;
-            return app;
         }
 
         /// <summary>

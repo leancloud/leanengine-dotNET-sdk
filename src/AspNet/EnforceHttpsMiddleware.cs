@@ -31,7 +31,7 @@ namespace LeanCloud.Engine
             context.Response.StatusCode = 302;
             context.Response.Headers.Add("Location", url);
 
-            await context.Response.WriteAsync($"Found. Redirecting to ${url}");
+            await context.Response.WriteAsync($"Found. Redirecting to {url}");
         }
 
         /// <summary>
@@ -41,17 +41,13 @@ namespace LeanCloud.Engine
         /// <param name="context">Context.</param>
         public async Task Invoke(HttpContext context)
         {
-            await new RequestResponseLoggingMiddleware(_next).PrintRequest(context);
             var doRedirect = true;
             if (EngineAspNetMiddleware.ProxyTrusted)
             {
                 var proxyHeader = context.GetRequestHeader("x-forwarded-proto");
                 if (!string.IsNullOrEmpty(proxyHeader))
                 {
-                    if (proxyHeader.ToLower() == "https")
-                    {
-                        doRedirect = false;
-                    }
+                    doRedirect &= proxyHeader.ToLower() != "https";
                 }
             }
             if (doRedirect && (EngineAspNetMiddleware.hostingCloud.IsProduction || context.Request.Host.Value.EndsWith(".leanapp.cn", StringComparison.Ordinal)) && !context.Request.IsHttps)

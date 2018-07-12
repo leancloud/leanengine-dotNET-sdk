@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using LeanCloud.Engine;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace LeanCloud.Engine.Sample.ConsoleAppHosting.NetCore
+namespace WebHosting.CloudFunctions
 {
     public class Startup
     {
@@ -21,7 +22,7 @@ namespace LeanCloud.Engine.Sample.ConsoleAppHosting.NetCore
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc();
+            services.AddRouting();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -36,14 +37,14 @@ namespace LeanCloud.Engine.Sample.ConsoleAppHosting.NetCore
                 app.UseExceptionHandler("/Error");
             }
 
+            Cloud cloud = new Cloud().UseHookClass<TodoHook>();
+            app.UseCloud(cloud);
+            app.UseLog();
+            app.TrustProxy();
+            app.UseHttpsRedirect();
+
             app.UseStaticFiles();
 
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller}/{action=Index}/{id?}");
-            });
         }
     }
 }
