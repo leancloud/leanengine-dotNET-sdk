@@ -17,6 +17,7 @@
         <dependencies>
             <dependency id="LeanCloud.Engine" version="2018.7.10.1" />
             <dependency id="Microsoft.AspNetCore" version="2.1.0" />
+            <dependency id="Microsoft.Extensions.Caching.Redis" version="2.0.0" />
         </dependencies>
     </metadata>
     <files>
