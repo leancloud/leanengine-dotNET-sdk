@@ -18,12 +18,27 @@ using LeanCloud.Storage.Internal;
 
 namespace LeanCloud.Engine
 {
+    /// <summary>
+    /// Middleware options.
+    /// </summary>
     public struct MiddlewareOptions
     {
+        /// <summary>
+        /// Gets or sets a value indicating whether this <see cref="T:LeanCloud.Engine.MiddlewareOptions"/> trust proxy.
+        /// </summary>
+        /// <value><c>true</c> if trust proxy; otherwise, <c>false</c>.</value>
         public bool TrustProxy { get; set; }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether this <see cref="T:LeanCloud.Engine.MiddlewareOptions"/> https redirect.
+        /// </summary>
+        /// <value><c>true</c> if https redirect; otherwise, <c>false</c>.</value>
         public bool HttpsRedirect { get; set; }
 
+        /// <summary>
+        /// Gets or sets a value indicating whether this <see cref="T:LeanCloud.Engine.MiddlewareOptions"/> is log.
+        /// </summary>
+        /// <value><c>true</c> if log; otherwise, <c>false</c>.</value>
         public bool Log { get; set; }
     }
 
@@ -295,6 +310,7 @@ namespace LeanCloud.Engine
         /// <param name="app">App.</param>
         public static IApplicationBuilder UseHttpsRedirect(this IApplicationBuilder app)
         {
+            app.TrustProxy();
             app.UseMiddleware<EnforceHttpsMiddleware>();
             return app;
         }

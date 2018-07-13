@@ -37,7 +37,6 @@ namespace LeanCloud.Engine.AspNetDemo
 
             var cloud = new Cloud().EquipFunctions();
             app.UseCloud(cloud);
-            app.TrustProxy();
             app.UseHttpsRedirect();
             cloud.Start();
 

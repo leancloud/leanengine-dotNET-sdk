@@ -39,7 +39,6 @@ namespace AspNetMvcHosting.Default
 
             app.UseCloud();
             app.UseLog();
-            app.TrustProxy();
             app.UseHttpsRedirect();
 
             app.UseStaticFiles();

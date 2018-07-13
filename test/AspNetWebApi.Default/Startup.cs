@@ -25,6 +25,10 @@ namespace AspNetWebApi.Default
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+
+            var instanceName = "dev";
+            Environment.SetEnvironmentVariable($"REDIS_URL_{instanceName}", "redis://h:foobared@localhost:6379");
+            services.UseLeanCache(instanceName);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -36,7 +40,6 @@ namespace AspNetWebApi.Default
             }
 
             app.UseCloud();
-            app.TrustProxy();
             app.UseLog();
             app.UseHttpsRedirect();
 
