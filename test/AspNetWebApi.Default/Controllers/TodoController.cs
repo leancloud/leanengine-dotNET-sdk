@@ -30,13 +30,6 @@ namespace AspNetWebApi.Default.Controllers
             get => todoDb;
         }
 
-        // GET: api/todo
-        [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
-
         // GET api/todo/5
         [HttpGet("{id}")]
         public JsonResult Get(int id)
@@ -57,6 +50,15 @@ namespace AspNetWebApi.Default.Controllers
 
             return Json(new { ID = 1 });
         }
+
+        // GET: api/todo
+        [HttpGet]
+        public IEnumerable<string> Get()
+        {
+            return new string[] { "value1", "value2" };
+        }
+
+
 
         // PUT api/todo/5
         [HttpPut("{id}")]
