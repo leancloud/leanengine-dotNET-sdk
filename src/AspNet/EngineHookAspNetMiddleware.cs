@@ -303,6 +303,7 @@ namespace LeanCloud.Engine
             return app;
         }
 
+        internal static bool UsedHttpsRedirect { get; set; }
         /// <summary>
         /// Uses the https redirect.
         /// </summary>
@@ -311,6 +312,7 @@ namespace LeanCloud.Engine
         public static IApplicationBuilder UseHttpsRedirect(this IApplicationBuilder app)
         {
             app.TrustProxy();
+            UsedHttpsRedirect = true;
             app.UseMiddleware<EnforceHttpsMiddleware>();
             return app;
         }
@@ -342,6 +344,28 @@ namespace LeanCloud.Engine
             return cloud;
         }
 
+        #region get hosting sub-domain with schema
+        /// <summary>
+        /// get hosting url,eg https://dotnetweb.leanapp.cn
+        /// </summary>
+        /// <param name="cloud"></param>
+        /// <returns></returns>
+        public static string GetHostingUrl(this Cloud cloud)
+        {
+            var regionMainDomianKv = new Dictionary<string, string>()
+            {
+                { "cn", ".leanapp.cn" },
+                { "us", ".avosapps.us" }
+            };
+            var shcema = UsedHttpsRedirect ? "https" : "http";
+            var region = cloud.GetLeanEnv(Cloud.LeanEnvKey.LEANCLOUD_REGION);
+            var mainDomain = regionMainDomianKv[region.ToLower()];
+            var subDomain = cloud.GetLeanEnv(Cloud.LeanEnvKey.LEANCLOUD_APP_DOMAIN);
+
+            return $"{shcema}://{subDomain}{mainDomain}";
+
+        }
+        #endregion
 
         private static string HookKey
         {
