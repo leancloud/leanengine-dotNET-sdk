@@ -15,4 +15,8 @@
   <ItemGroup>
     <ProjectReference Include="..\..\src\AspNet\LeanCloud.Engine.Middleware.AspNetCore.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
 </Project>

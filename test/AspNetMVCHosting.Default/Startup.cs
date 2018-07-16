@@ -37,9 +37,7 @@ namespace AspNetMvcHosting.Default
                 app.UseExceptionHandler("/Home/Error");
             }
 
-            app.UseCloud();
-            app.UseLog();
-            app.UseHttpsRedirect();
+            //app.UseCloud();
 
             app.UseStaticFiles();
 

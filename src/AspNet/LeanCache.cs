@@ -43,10 +43,25 @@ namespace LeanCloud.Engine
         /// </summary>
         public struct Configurations
         {
+            /// <summary>
+            /// Connection string
+            /// </summary>
             public string ConnectionString { get; set; }
+            /// <summary>
+            /// password 
+            /// </summary>
             public string Password { get; set; }
+            /// <summary>
+            /// host
+            /// </summary>
             public string Host { get; set; }
+            /// <summary>
+            /// port number
+            /// </summary>
             public int Port { get; set; }
+            /// <summary>
+            /// instance name.
+            /// </summary>
             public string InstanceName { get; set; }
         }
 

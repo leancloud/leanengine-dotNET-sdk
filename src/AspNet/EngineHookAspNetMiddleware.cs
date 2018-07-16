@@ -54,56 +54,57 @@ namespace LeanCloud.Engine
         public static IHostingEnvironment HostingEnvironment { get; set; }
 
 
-        /// <summary>
-        /// Builds the web host.
-        /// </summary>
-        /// <returns>The web host.</returns>
-        /// <param name="webHostBuilder">Web host builder.</param>
-        /// <param name="cloud">Cloud.</param>
-        public static IWebHostBuilder BuildWebHost(IWebHostBuilder webHostBuilder, Cloud cloud)
+        public static IWebHostBuilder BuildWebHost(IWebHostBuilder webHostBuilder, Cloud cloud, Action<IApplicationBuilder> configApp = null)
         {
-            webHostBuilder.ConfigureServices(services =>
-                     {
-                         services.AddRouting();
-                     }).ConfigureAppConfiguration((hostingContext, config) =>
-                     {
-                         var env = hostingContext.HostingEnvironment;
-                         HostingEnvironment = env;
-                         config.AddEnvironmentVariables();
+            webHostBuilder = webHostBuilder.ConfigureServices(services =>
+                      {
+                          services.AddRouting();
+                      }).ConfigureAppConfiguration((hostingContext, config) =>
+                      {
+                          var env = hostingContext.HostingEnvironment;
+                          HostingEnvironment = env;
+                          config.AddEnvironmentVariables();
 
-                     }).Configure(app =>
-                     {
-                         if (toggleLog)
-                         {
-                             app.UseLog();
-                         }
-                         app.UseCloud(cloud);
-                         app.UseDefaultHomepage();
-                         cloud.Start();
-                     }).ConfigureLogging((context, builder) =>
-                     {
-                         builder.AddFilter("Microsoft", LogLevel.Warning)
-                                          .AddFilter("System", LogLevel.Warning)
-                                          .AddFilter("NToastNotify", LogLevel.Warning)
-                                          .AddConsole();
-                     }).UseKestrel();
+                      }).Configure(app =>
+                      {
+                          if (toggleLog)
+                          {
+                              app.UseLog();
+                          }
+                          app.UseCloud(cloud);
+                          app.UseDefaultHomepage();
+                          cloud.Start();
+                          configApp?.Invoke(app);
+                      }).ConfigureLogging((context, builder) =>
+                      {
+                          builder.AddFilter("Microsoft", LogLevel.Warning)
+                                           .AddFilter("System", LogLevel.Warning)
+                                           .AddFilter("NToastNotify", LogLevel.Warning)
+                                           .AddConsole();
+                      }).UseKestrel();
 
             if (cloud.IsDevelopment)
             {
-                webHostBuilder.UseLocalHost(3000);
+                webHostBuilder = webHostBuilder.UseLocalHost();
             }
             return webHostBuilder;
         }
+
         /// <summary>
         /// Uses the local host with port.
         /// </summary>
         /// <returns>The local host.</returns>
         /// <param name="webHostBuilder">Web host builder.</param>
         /// <param name="port">Port.</param>
-        public static IWebHostBuilder UseLocalHost(this IWebHostBuilder webHostBuilder, UInt16 port)
+        public static IWebHostBuilder UseLocalHost(this IWebHostBuilder webHostBuilder)
         {
-            webHostBuilder.UseUrls(string.Format("http://localhost:{0}", port));
+            webHostBuilder.UseUrls(GetLocalHostUrl());
             return webHostBuilder;
+        }
+
+        public static string GetLocalHostUrl(UInt16 port = 3000)
+        {
+            return $"http://localhost:{port}";
         }
 
         /// <summary>
@@ -139,6 +140,31 @@ namespace LeanCloud.Engine
             return cloud;
         }
 
+        public static IWebHostBuilder UseCloud(this IWebHostBuilder webHostBuilder, Cloud cloud, Action<IApplicationBuilder, Cloud> configureAppCloud)
+        {
+            webHostBuilder = BuildWebHost(webHostBuilder, cloud, (app) =>
+            {
+                configureAppCloud(app, cloud);
+            });
+            return webHostBuilder;
+        }
+
+        public static IWebHostBuilder UseCloud(this IWebHostBuilder webHostBuilder, Action<IApplicationBuilder, Cloud> configureAppCloud)
+        {
+            return webHostBuilder.UseCloud(new Cloud(), configureAppCloud);
+        }
+
+        public static IWebHostBuilder UseCloud(this IWebHostBuilder webHostBuilder,  Action<IApplicationBuilder> configureApp)
+        {
+            return webHostBuilder.UseCloud(new Cloud(), configureApp); ;
+        }
+
+        public static IWebHostBuilder UseCloud(this IWebHostBuilder webHostBuilder, Cloud cloud, Action<IApplicationBuilder> configureApp)
+        {
+            webHostBuilder = BuildWebHost(webHostBuilder, cloud, configureApp);
+            return webHostBuilder;
+        }
+
         /// <summary>
         /// Configs the cloud.
         /// </summary>
@@ -147,8 +173,7 @@ namespace LeanCloud.Engine
         /// <param name="cloud">Cloud.</param>
         public static IWebHostBuilder UseCloud(this IWebHostBuilder webHostBuilder, Cloud cloud)
         {
-            webHostBuilder = BuildWebHost(webHostBuilder, cloud);
-            return webHostBuilder;
+            return webHostBuilder.UseCloud(cloud, (app) => { });
         }
 
         /// <summary>
@@ -158,51 +183,7 @@ namespace LeanCloud.Engine
         /// <param name="webHostBuilder">Web host builder.</param>
         public static IWebHostBuilder UseCloud(this IWebHostBuilder webHostBuilder)
         {
-            var cloud = new Cloud();
-            return webHostBuilder.UseCloud(cloud);
-        }
-
-        /// <summary>
-        /// Uses the log.
-        /// </summary>
-        /// <returns>The log.</returns>
-        /// <param name="webHostBuilder">Web host builder.</param>
-        public static IWebHostBuilder UseLog(this IWebHostBuilder webHostBuilder)
-        {
-            toggleLog = true;
-            webHostBuilder.Configure(app =>
-            {
-                app.UseLog();
-            });
-            return webHostBuilder;
-        }
-
-        /// <summary>
-        /// Trusts the proxy.
-        /// </summary>
-        /// <returns>The proxy.</returns>
-        /// <param name="webHostBuilder">Web host builder.</param>
-        public static IWebHostBuilder TrustProxy(this IWebHostBuilder webHostBuilder)
-        {
-            webHostBuilder.Configure(app =>
-            {
-                app.TrustProxy();
-            });
-            return webHostBuilder;
-        }
-
-        /// <summary>
-        /// Uses the https redirect.
-        /// </summary>
-        /// <returns>The https redirect.</returns>
-        /// <param name="webHostBuilder">Web host builder.</param>
-        public static IWebHostBuilder UseHttpsRedirect(this IWebHostBuilder webHostBuilder)
-        {
-            webHostBuilder.Configure(app =>
-            {
-                app.UseHttpsRedirect();
-            });
-            return webHostBuilder;
+            return webHostBuilder.UseCloud(new Cloud());
         }
 
         #endregion
@@ -210,7 +191,6 @@ namespace LeanCloud.Engine
         internal static Cloud hostingCloud;
 
         #region application builder extensions
-
 
         /// <summary>
         /// Uses the default homepage.
@@ -352,10 +332,14 @@ namespace LeanCloud.Engine
         /// <returns></returns>
         public static string GetHostingUrl(this Cloud cloud)
         {
+            if (cloud.IsDevelopment)
+            {
+                return GetLocalHostUrl();
+            }
             var regionMainDomianKv = new Dictionary<string, string>()
             {
                 { "cn", ".leanapp.cn" },
-                { "us", ".avosapps.us" }
+                { "us", "avosapps.us" }
             };
             var shcema = UsedHttpsRedirect ? "https" : "http";
             var region = cloud.GetLeanEnv(Cloud.LeanEnvKey.LEANCLOUD_REGION);
@@ -363,7 +347,6 @@ namespace LeanCloud.Engine
             var subDomain = cloud.GetLeanEnv(Cloud.LeanEnvKey.LEANCLOUD_APP_DOMAIN);
 
             return $"{shcema}://{subDomain}{mainDomain}";
-
         }
         #endregion
 

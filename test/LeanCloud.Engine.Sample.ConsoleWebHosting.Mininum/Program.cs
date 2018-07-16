@@ -14,10 +14,9 @@ namespace WebHosting.Minimum
 
         public static IWebHost BuildWebHost(string[] args) =>
         WebHost.CreateDefaultBuilder(args)
-               .UseCloud()
-               .UseLog()
-               .TrustProxy()
-               .UseHttpsRedirect()
-               .Build();
+               .UseCloud((app, cloud) =>
+               {
+                   Console.WriteLine(cloud.GetHostingUrl());
+               }).Build();
     }
 }
