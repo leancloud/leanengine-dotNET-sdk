@@ -29,7 +29,6 @@ namespace WebHosting.Default
 
             app.UseCloud();
             app.UseLog();
-            app.TrustProxy();
             app.UseHttpsRedirect();
 
             app.Run(async (context) =>

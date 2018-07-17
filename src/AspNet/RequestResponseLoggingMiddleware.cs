@@ -33,16 +33,30 @@ namespace LeanCloud.Engine
         {
             Console.WriteLine(await FormatRequest(context.Request));
 
-            var originalBodyStream = context.Response.Body;
+            Stream originalBody = context.Response.Body;
 
-            using (var responseBody = new MemoryStream())
+            try
             {
-                context.Response.Body = responseBody;
+                using (var memStream = new MemoryStream())
+                {
+                    context.Response.Body = memStream;
 
-                await _next(context);
+                    await _next(context);
 
-                Console.WriteLine(await FormatResponse(context.Response));
-                await responseBody.CopyToAsync(originalBodyStream);
+                    memStream.Position = 0;
+                    string responseBody = new StreamReader(memStream).ReadToEnd();
+                    Console.WriteLine($"{context.Response.StatusCode} {responseBody}");
+                    memStream.Position = 0;
+                    await memStream.CopyToAsync(originalBody);
+                }
+            }
+            catch (Exception logEx)
+            {
+
+            }
+            finally
+            {
+                context.Response.Body = originalBody;
             }
         }
 

@@ -1,35 +1,38 @@
-
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LeanCloud.Engine.Middleware.AspNetCore", "AspNet\LeanCloud.Engine.Middleware.AspNetCore.csproj", "{6497534C-BCE1-4FF1-8CF9-3BF57BAD5221}"
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2042
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LeanCloud.Engine.Middleware.AspNetCore", "AspNet\LeanCloud.Engine.Middleware.AspNetCore.csproj", "{6497534C-BCE1-4FF1-8CF9-3BF57BAD5221}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sample", "Sample", "{1D31A919-27E8-4303-9AF6-15AE88326757}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebHosting.CloudFunctions", "..\test\LeanCloud.Engine.Sample.ConsoleAppHosting.NetCore\WebHosting.CloudFunctions.csproj", "{CCAC39EE-1D7C-4EB5-9CBF-942335453C3A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebHosting.CloudFunctions", "..\test\LeanCloud.Engine.Sample.ConsoleAppHosting.NetCore\WebHosting.CloudFunctions.csproj", "{CCAC39EE-1D7C-4EB5-9CBF-942335453C3A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LeanCloud.Engine", "Core\LeanCloud.Engine.csproj", "{D198647A-1103-451A-9836-BE1532E19379}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LeanCloud.Engine", "Core\LeanCloud.Engine.csproj", "{D198647A-1103-451A-9836-BE1532E19379}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspNetHosting.Default", "..\test\LeanCloud.Engine.AspNetDemo\AspNetHosting.Default.csproj", "{A8EEECFF-1274-49FD-825C-0B2932F6F838}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspNetHosting.Default", "..\test\LeanCloud.Engine.AspNetDemo\AspNetHosting.Default.csproj", "{A8EEECFF-1274-49FD-825C-0B2932F6F838}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{EA5D1215-A78A-4CF1-92A9-6046D4B3A01A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LeanCloud.Engine.NetCore.UnitTest", "..\test\LeanCloud.Engine.NetCore.UnitTest\LeanCloud.Engine.NetCore.UnitTest.csproj", "{148DD5FA-E503-4FAB-9C45-0803B133351D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LeanCloud.Engine.NetCore.UnitTest", "..\test\LeanCloud.Engine.NetCore.UnitTest\LeanCloud.Engine.NetCore.UnitTest.csproj", "{148DD5FA-E503-4FAB-9C45-0803B133351D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LeanCloud.Engine.NetCore.ConsoleApp.Debug", "..\test\LeanCloud.Engine.NetCore.ConsoleApp.Debug\LeanCloud.Engine.NetCore.ConsoleApp.Debug.csproj", "{1C1405BD-E995-4FCD-84E3-790DD09B40F7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LeanCloud.Engine.NetCore.ConsoleApp.Debug", "..\test\LeanCloud.Engine.NetCore.ConsoleApp.Debug\LeanCloud.Engine.NetCore.ConsoleApp.Debug.csproj", "{1C1405BD-E995-4FCD-84E3-790DD09B40F7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppHosting.Minimum", "..\test\LeanCloud.Engine.Sample.ConsoleAppHosting.Minimum\AppHosting.Minimum.csproj", "{37512D02-81A5-4C4F-ACCE-B1E9CF655895}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppHosting.Minimum", "..\test\LeanCloud.Engine.Sample.ConsoleAppHosting.Minimum\AppHosting.Minimum.csproj", "{37512D02-81A5-4C4F-ACCE-B1E9CF655895}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebHosting.Minimum", "..\test\LeanCloud.Engine.Sample.ConsoleWebHosting.Mininum\WebHosting.Minimum.csproj", "{98951191-8FF9-4FCD-90A4-944DE1E7FD0A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebHosting.Minimum", "..\test\LeanCloud.Engine.Sample.ConsoleWebHosting.Mininum\WebHosting.Minimum.csproj", "{98951191-8FF9-4FCD-90A4-944DE1E7FD0A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ConsoleApp", "ConsoleApp", "{EE2129D5-51A4-4FC6-9AF8-DA5753B08FCF}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{8B8ADB30-EE94-4765-83BB-4B4D05560E16}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebHosting.Default", "..\test\WebHosting\WebHosting.Default.csproj", "{EF229427-EA69-45F6-AE81-EC34A9660BC0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebHosting.Default", "..\test\WebHosting\WebHosting.Default.csproj", "{EF229427-EA69-45F6-AE81-EC34A9660BC0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspNetMvcHosting.Default", "..\test\AspNetMVCHosting.Default\AspNetMVCHosting.Default.csproj", "{8564FB0A-F1F4-4B62-91FE-3EF1F6F648B9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspNetMVCHosting.Default", "..\test\AspNetMVCHosting.Default\AspNetMVCHosting.Default.csproj", "{8564FB0A-F1F4-4B62-91FE-3EF1F6F648B9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspNetWebApi.Default", "..\test\AspNetWebApi.Default\AspNetWebApi.Default.csproj", "{F6571E17-EE82-46DC-875F-A43DD01CE577}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspNetWebApi.Default", "..\test\AspNetWebApi.Default\AspNetWebApi.Default.csproj", "{F6571E17-EE82-46DC-875F-A43DD01CE577}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebHosting.UseCloud.Minimum", "..\test\WebHosting.UseCloud.Minimum\WebHosting.UseCloud.Minimum.csproj", "{D42DB344-6A6E-4AB4-A4D8-D62DD8837C0F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -81,6 +84,13 @@ Global
 		{F6571E17-EE82-46DC-875F-A43DD01CE577}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F6571E17-EE82-46DC-875F-A43DD01CE577}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F6571E17-EE82-46DC-875F-A43DD01CE577}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D42DB344-6A6E-4AB4-A4D8-D62DD8837C0F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D42DB344-6A6E-4AB4-A4D8-D62DD8837C0F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D42DB344-6A6E-4AB4-A4D8-D62DD8837C0F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D42DB344-6A6E-4AB4-A4D8-D62DD8837C0F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{CCAC39EE-1D7C-4EB5-9CBF-942335453C3A} = {EE2129D5-51A4-4FC6-9AF8-DA5753B08FCF}
@@ -94,5 +104,9 @@ Global
 		{EF229427-EA69-45F6-AE81-EC34A9660BC0} = {EE2129D5-51A4-4FC6-9AF8-DA5753B08FCF}
 		{8564FB0A-F1F4-4B62-91FE-3EF1F6F648B9} = {8B8ADB30-EE94-4765-83BB-4B4D05560E16}
 		{F6571E17-EE82-46DC-875F-A43DD01CE577} = {8B8ADB30-EE94-4765-83BB-4B4D05560E16}
+		{D42DB344-6A6E-4AB4-A4D8-D62DD8837C0F} = {EE2129D5-51A4-4FC6-9AF8-DA5753B08FCF}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7C09F422-9C58-43FC-AA7D-81FE713D95DE}
 	EndGlobalSection
 EndGlobal

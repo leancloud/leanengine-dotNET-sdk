@@ -60,7 +60,7 @@ namespace LeanCloud.Engine
         /// <param name="webHostBuilder">Web host builder.</param>
         /// <param name="cloud">Cloud.</param>
         /// <param name="configApp">Config app.</param>
-        public static IWebHostBuilder BuildWebHost(IWebHostBuilder webHostBuilder, Cloud cloud, Action<IApplicationBuilder> configApp = null)
+        public static IWebHostBuilder BuildWebHost(IWebHostBuilder webHostBuilder, Cloud cloud)
         {
             webHostBuilder = webHostBuilder.ConfigureServices(services =>
                       {
@@ -77,10 +77,13 @@ namespace LeanCloud.Engine
                           {
                               app.UseLog();
                           }
+                          if (ProxyTrusted && UsedHttpsRedirect)
+                          {
+                              app.UseHttpsRedirect();
+                          }
                           app.UseCloud(cloud);
                           app.UseDefaultHomepage();
                           cloud.Start();
-                          configApp?.Invoke(app);
                       }).ConfigureLogging((context, builder) =>
                       {
                           builder.AddFilter("Microsoft", LogLevel.Warning)
@@ -155,39 +158,13 @@ namespace LeanCloud.Engine
         /// </summary>
         /// <returns>The cloud.</returns>
         /// <param name="webHostBuilder">Web host builder.</param>
-        /// <param name="configureAppCloud">Configure app cloud.</param>
-        public static IWebHostBuilder UseCloud(this IWebHostBuilder webHostBuilder, Action<IApplicationBuilder, Cloud> configureAppCloud)
+        /// <param name="configureCloud">Configure cloud.</param>
+        public static IWebHostBuilder UseCloud(this IWebHostBuilder webHostBuilder, Action<Cloud> configureCloud)
         {
             var cloud = new Cloud();
-            webHostBuilder = BuildWebHost(webHostBuilder, cloud, (app) =>
-             {
-                 configureAppCloud(app, cloud);
-             });
+            configureCloud(cloud);
+            webHostBuilder = BuildWebHost(webHostBuilder, cloud);
             return webHostBuilder;
-        }
-
-        /// <summary>
-        /// Uses the cloud.
-        /// </summary>
-        /// <returns>The cloud.</returns>
-        /// <param name="webHostBuilder">Web host builder.</param>
-        /// <param name="cloud">Cloud.</param>
-        /// <param name="configureApp">Configure app.</param>
-        public static IWebHostBuilder UseCloud(this IWebHostBuilder webHostBuilder, Cloud cloud, Action<IApplicationBuilder> configureApp)
-        {
-            webHostBuilder = BuildWebHost(webHostBuilder, cloud, configureApp);
-            return webHostBuilder;
-        }
-
-        /// <summary>
-        /// Uses the cloud.
-        /// </summary>
-        /// <returns>The cloud.</returns>
-        /// <param name="webHostBuilder">Web host builder.</param>
-        /// <param name="configureApp">Configure app.</param>
-        public static IWebHostBuilder UseCloud(this IWebHostBuilder webHostBuilder, Action<IApplicationBuilder> configureApp)
-        {
-            return webHostBuilder.UseCloud(new Cloud(), configureApp); ;
         }
 
         /// <summary>
@@ -198,7 +175,8 @@ namespace LeanCloud.Engine
         /// <param name="cloud">Cloud.</param>
         public static IWebHostBuilder UseCloud(this IWebHostBuilder webHostBuilder, Cloud cloud)
         {
-            return webHostBuilder.UseCloud(cloud, (app) => { });
+            webHostBuilder = BuildWebHost(webHostBuilder, cloud);
+            return webHostBuilder;
         }
 
         /// <summary>
@@ -346,6 +324,18 @@ namespace LeanCloud.Engine
         public static Cloud UseLog(this Cloud cloud)
         {
             toggleLog = true;
+            return cloud;
+        }
+
+        /// <summary>
+        /// Use https redirect.
+        /// </summary>
+        /// <param name="cloud"></param>
+        /// <returns></returns>
+        public static Cloud UseHttpsRedirect(this Cloud cloud)
+        {
+            UsedHttpsRedirect = true;
+            ProxyTrusted = true;
             return cloud;
         }
 
