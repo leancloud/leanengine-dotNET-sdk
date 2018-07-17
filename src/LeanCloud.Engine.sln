@@ -34,6 +34,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspNetWebApi.Default", "..\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebHosting.UseCloud.Minimum", "..\test\WebHosting.UseCloud.Minimum\WebHosting.UseCloud.Minimum.csproj", "{D42DB344-6A6E-4AB4-A4D8-D62DD8837C0F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebHosting.WebSocket.Minimum", "..\test\WebHosting.WebSocket.Minimum\WebHosting.WebSocket.Minimum.csproj", "{2C7BB7F5-E230-4BA1-9975-9255879FCBD8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -88,6 +90,10 @@ Global
 		{D42DB344-6A6E-4AB4-A4D8-D62DD8837C0F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D42DB344-6A6E-4AB4-A4D8-D62DD8837C0F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D42DB344-6A6E-4AB4-A4D8-D62DD8837C0F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2C7BB7F5-E230-4BA1-9975-9255879FCBD8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C7BB7F5-E230-4BA1-9975-9255879FCBD8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C7BB7F5-E230-4BA1-9975-9255879FCBD8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C7BB7F5-E230-4BA1-9975-9255879FCBD8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -105,6 +111,7 @@ Global
 		{8564FB0A-F1F4-4B62-91FE-3EF1F6F648B9} = {8B8ADB30-EE94-4765-83BB-4B4D05560E16}
 		{F6571E17-EE82-46DC-875F-A43DD01CE577} = {8B8ADB30-EE94-4765-83BB-4B4D05560E16}
 		{D42DB344-6A6E-4AB4-A4D8-D62DD8837C0F} = {EE2129D5-51A4-4FC6-9AF8-DA5753B08FCF}
+		{2C7BB7F5-E230-4BA1-9975-9255879FCBD8} = {EE2129D5-51A4-4FC6-9AF8-DA5753B08FCF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7C09F422-9C58-43FC-AA7D-81FE713D95DE}

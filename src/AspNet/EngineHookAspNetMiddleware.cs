@@ -60,7 +60,7 @@ namespace LeanCloud.Engine
         /// <param name="webHostBuilder">Web host builder.</param>
         /// <param name="cloud">Cloud.</param>
         /// <param name="configApp">Config app.</param>
-        public static IWebHostBuilder BuildWebHost(IWebHostBuilder webHostBuilder, Cloud cloud)
+        public static IWebHostBuilder BuildWebHost(IWebHostBuilder webHostBuilder, Cloud cloud, Action<IApplicationBuilder> configApp = null)
         {
             webHostBuilder = webHostBuilder.ConfigureServices(services =>
                       {
@@ -84,6 +84,7 @@ namespace LeanCloud.Engine
                           app.UseCloud(cloud);
                           app.UseDefaultHomepage();
                           cloud.Start();
+                          configApp?.Invoke(app);
                       }).ConfigureLogging((context, builder) =>
                       {
                           builder.AddFilter("Microsoft", LogLevel.Warning)
@@ -189,6 +190,16 @@ namespace LeanCloud.Engine
             return webHostBuilder.UseCloud(new Cloud());
         }
 
+        #endregion
+
+        #region webhost builder and app build with cloud
+        public static IWebHostBuilder UseCloud(this IWebHostBuilder webHostBuilder, Action<Cloud> configureCloud, Action<IApplicationBuilder> configApp)
+        {
+            var cloud = new Cloud();
+            configureCloud(cloud);
+            webHostBuilder = BuildWebHost(webHostBuilder, cloud, configApp);
+            return webHostBuilder;
+        }
         #endregion
 
         internal static Cloud hostingCloud;

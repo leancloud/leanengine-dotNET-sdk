@@ -22,11 +22,5 @@ namespace WebHosting.UseCloud.Minimum
                 cloud.UseLog();
                 cloud.UseHttpsRedirect();
             }).Build();
-
-        public static void ConfigAppCloud(IApplicationBuilder app, Cloud cloud)
-        {
-            app.UseLog();
-            app.UseHttpsRedirect();
-        }
     }
 }
