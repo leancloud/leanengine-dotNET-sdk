@@ -42,7 +42,6 @@ namespace LeanCloud.Engine
                     context.Response.Body = memStream;
 
                     await _next(context);
-
                     memStream.Position = 0;
                     string responseBody = new StreamReader(memStream).ReadToEnd();
                     Console.WriteLine($"{context.Response.StatusCode} {responseBody}");

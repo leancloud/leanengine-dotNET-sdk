@@ -21,12 +21,17 @@ namespace WebHosting.WebSocket.Minimum
 
         public static IWebHost BuildWebHost(string[] args) =>
         WebHost.CreateDefaultBuilder(args)
-            .UseCloud(ConfigCloud, ConfigApp).Build();
+               .UseCloud(ConfigCloud, ConfigAppCloud).Build();
 
         public static void ConfigCloud(Cloud cloud)
         {
             cloud.UseLog();
             cloud.UseHttpsRedirect();
+        }
+
+        public static void ConfigAppCloud(IApplicationBuilder app, Cloud cloud)
+        {
+            ConfigApp(app);
         }
 
         public static void ConfigApp(IApplicationBuilder app)
@@ -57,7 +62,6 @@ namespace WebHosting.WebSocket.Minimum
                 {
                     await next();
                 }
-
             });
         }
         private static async Task Echo(HttpContext context, System.Net.WebSockets.WebSocket webSocket)

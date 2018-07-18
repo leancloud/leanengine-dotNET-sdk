@@ -58,10 +58,13 @@ namespace LeanCloud.Engine
         /// </summary>
         /// <returns>The web host.</returns>
         /// <param name="webHostBuilder">Web host builder.</param>
-        /// <param name="cloud">Cloud.</param>
+        /// <param name="configCloud">Config cloud.</param>
         /// <param name="configApp">Config app.</param>
-        public static IWebHostBuilder BuildWebHost(IWebHostBuilder webHostBuilder, Cloud cloud, Action<IApplicationBuilder> configApp = null)
+        /// <param name="configCloudApp">Config cloud app.</param>
+        public static IWebHostBuilder BuildWebHost(IWebHostBuilder webHostBuilder, Action<Cloud> configCloud = null, Action<IApplicationBuilder> configApp = null, Action<IApplicationBuilder, Cloud> configCloudApp = null)
         {
+            var cloud = new Cloud();
+            configCloud?.Invoke(cloud);
             webHostBuilder = webHostBuilder.ConfigureServices(services =>
                       {
                           services.AddRouting();
@@ -85,6 +88,7 @@ namespace LeanCloud.Engine
                           app.UseDefaultHomepage();
                           cloud.Start();
                           configApp?.Invoke(app);
+                          configCloudApp?.Invoke(app, cloud);
                       }).ConfigureLogging((context, builder) =>
                       {
                           builder.AddFilter("Microsoft", LogLevel.Warning)
@@ -99,6 +103,19 @@ namespace LeanCloud.Engine
             }
             return webHostBuilder;
         }
+
+        /// <summary>
+        /// Configures the cloud.
+        /// </summary>
+        /// <returns>The cloud.</returns>
+        /// <param name="webHostBuilder">Web host builder.</param>
+        /// <param name="configCloud">Config cloud.</param>
+        public static IWebHostBuilder ConfigureCloud(this IWebHostBuilder webHostBuilder, Action<Cloud> configCloud = null)
+        {
+            webHostBuilder = BuildWebHost(webHostBuilder, configCloud);
+            return webHostBuilder;
+        }
+
 
         /// <summary>
         /// Uses the local host with port.
@@ -149,7 +166,7 @@ namespace LeanCloud.Engine
         /// <param name="webHostBuilder">Web host builder.</param>
         public static Cloud Start(this Cloud cloud, IWebHostBuilder webHostBuilder)
         {
-            webHostBuilder = BuildWebHost(webHostBuilder, cloud);
+            webHostBuilder = BuildWebHost(webHostBuilder, (c) => { c = cloud; });
             webHostBuilder.Build().Run();
             return cloud;
         }
@@ -162,10 +179,7 @@ namespace LeanCloud.Engine
         /// <param name="configureCloud">Configure cloud.</param>
         public static IWebHostBuilder UseCloud(this IWebHostBuilder webHostBuilder, Action<Cloud> configureCloud)
         {
-            var cloud = new Cloud();
-            configureCloud(cloud);
-            webHostBuilder = BuildWebHost(webHostBuilder, cloud);
-            return webHostBuilder;
+            return webHostBuilder.ConfigureCloud(configureCloud);
         }
 
         /// <summary>
@@ -176,7 +190,7 @@ namespace LeanCloud.Engine
         /// <param name="cloud">Cloud.</param>
         public static IWebHostBuilder UseCloud(this IWebHostBuilder webHostBuilder, Cloud cloud)
         {
-            webHostBuilder = BuildWebHost(webHostBuilder, cloud);
+            webHostBuilder = BuildWebHost(webHostBuilder, (c) => { c = cloud; });
             return webHostBuilder;
         }
 
@@ -193,11 +207,29 @@ namespace LeanCloud.Engine
         #endregion
 
         #region webhost builder and app build with cloud
+        /// <summary>
+        /// Uses the cloud.
+        /// </summary>
+        /// <returns>The cloud.</returns>
+        /// <param name="webHostBuilder">Web host builder.</param>
+        /// <param name="configureCloud">Configure cloud.</param>
+        /// <param name="configApp">Config app.</param>
         public static IWebHostBuilder UseCloud(this IWebHostBuilder webHostBuilder, Action<Cloud> configureCloud, Action<IApplicationBuilder> configApp)
         {
-            var cloud = new Cloud();
-            configureCloud(cloud);
-            webHostBuilder = BuildWebHost(webHostBuilder, cloud, configApp);
+            webHostBuilder = BuildWebHost(webHostBuilder, configureCloud, configApp);
+            return webHostBuilder;
+        }
+
+        /// <summary>
+        /// Uses the cloud.
+        /// </summary>
+        /// <returns>The cloud.</returns>
+        /// <param name="webHostBuilder">Web host builder.</param>
+        /// <param name="configureCloud">Configure cloud.</param>
+        /// <param name="configAppCloud">Config app cloud.</param>
+        public static IWebHostBuilder UseCloud(this IWebHostBuilder webHostBuilder, Action<Cloud> configureCloud, Action<IApplicationBuilder, Cloud> configAppCloud)
+        {
+            webHostBuilder = BuildWebHost(webHostBuilder, configureCloud, null, configAppCloud);
             return webHostBuilder;
         }
         #endregion
