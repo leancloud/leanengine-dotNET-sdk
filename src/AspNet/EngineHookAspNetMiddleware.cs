@@ -638,16 +638,11 @@ namespace LeanCloud.Engine
                         "__before","__after"
                     });
 
-                    List<string> updatedKeys = null;
-                    if (objectMetaData.ContainsKey("_updatedKeys"))
-                    {
-                        if (objectMetaData["_updatedKeys"] is List<object> upKys)
-                        {
-                            updatedKeys = upKys.Select(k => k.ToString()).ToList();
-                        }
-                    }
+
                     var objectState = AVObjectCoder.Instance.Decode(objectMetaData, AVDecoder.Instance);
                     AVObject theObject = AVObject.FromState<AVObject>(objectState, className);
+
+                    var updatedKeys = theObject.GetUpdatedKeys();
 
                     AVUser by = null;
                     if (data["user"] is IDictionary<string, object> userMetaData)

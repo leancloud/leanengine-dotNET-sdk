@@ -57,7 +57,6 @@ namespace LeanCloud.Engine
         /// </summary>
         /// <value>The singleton.</value>
         public static Cloud Singleton { get; set; }
-
         #endregion
         /// <summary>
         /// Gets the app identifier.

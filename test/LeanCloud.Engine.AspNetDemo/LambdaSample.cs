@@ -69,6 +69,17 @@ namespace LeanCloud.Engine.AspNetDemo
                 // todo is an Todo instance.
                 return Task.FromResult(todo);
             });
+
+            cloud.BeforeUpdate("Todo", review => 
+            {
+                var updatedKeys = review.GetUpdatedKeys();
+                if (updatedKeys.Contains("comment"))
+                {
+                    var comment = review.Get<string>("comment");
+                    if (comment.Length > 140) throw new EngineException(400, "comment 长度不得超过 140 字符");
+                }
+                return Task.FromResult(true);
+            });
         }
 
         public class Todo : AVObject
