@@ -25,12 +25,10 @@ namespace LeanCloud.Engine
         /// The after update.
         /// </summary>
         AfterUpdate = 4,
-
         /// <summary>
         /// The before delete.
         /// </summary>
         BeforeDelete = 5,
-
         /// <summary>
         /// The after delete.
         /// </summary>

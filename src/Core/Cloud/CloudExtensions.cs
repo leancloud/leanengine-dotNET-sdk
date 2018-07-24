@@ -38,87 +38,151 @@ namespace LeanCloud.Engine
             return cloud;
         }
 
+        public static Cloud UseHook(this Cloud cloud, string className, EngineHookType hookType, EngineHookDelegateSynchronous hookDelegate)
+        {
+            EngineHookDelegate del = (context) =>
+            {
+                return Task.Factory.StartNew(() => hookDelegate(context));
+            };
+
+            return cloud.UseHook(className, hookType, del);
+        }
+
         public static Cloud BeforeSave(this Cloud cloud, string className, EngineHookDelegate hookDelegate)
         {
-            cloud.UseHook(className, EngineHookType.BeforeSave, hookDelegate);
-            return cloud;
+            return cloud.UseHook(className, EngineHookType.BeforeSave, hookDelegate);
+        }
+
+        public static Cloud BeforeSave(this Cloud cloud, string className, EngineHookDelegateSynchronous hookDelegate)
+        {
+            return cloud.UseHook(className, EngineHookType.BeforeSave, hookDelegate);
         }
 
         public static Cloud AfterSave(this Cloud cloud, string className, EngineHookDelegate hookDelegate)
         {
-            cloud.UseHook(className, EngineHookType.AfterSave, hookDelegate);
-            return cloud;
+            return cloud.UseHook(className, EngineHookType.AfterSave, hookDelegate);
+        }
+
+        public static Cloud AfterSave(this Cloud cloud, string className, EngineHookDelegateSynchronous hookDelegate)
+        {
+            return cloud.UseHook(className, EngineHookType.AfterSave, hookDelegate);
         }
 
         public static Cloud BeforeUpdate(this Cloud cloud, string className, EngineHookDelegate hookDelegate)
         {
-            cloud.UseHook(className, EngineHookType.BeforeUpdate, hookDelegate);
-            return cloud;
+            return cloud.UseHook(className, EngineHookType.BeforeUpdate, hookDelegate);
+        }
+
+        public static Cloud BeforeUpdate(this Cloud cloud, string className, EngineHookDelegateSynchronous hookDelegate)
+        {
+            return cloud.UseHook(className, EngineHookType.BeforeUpdate, hookDelegate);
         }
 
         public static Cloud AfterUpdate(this Cloud cloud, string className, EngineHookDelegate hookDelegate)
         {
-            cloud.UseHook(className, EngineHookType.AfterUpdate, hookDelegate);
-            return cloud;
+            return cloud.UseHook(className, EngineHookType.AfterUpdate, hookDelegate);
+        }
+
+        public static Cloud AfterUpdate(this Cloud cloud, string className, EngineHookDelegateSynchronous hookDelegate)
+        {
+            return cloud.UseHook(className, EngineHookType.AfterUpdate, hookDelegate);
         }
 
         public static Cloud BeforeDelete(this Cloud cloud, string className, EngineHookDelegate hookDelegate)
         {
-            cloud.UseHook(className, EngineHookType.BeforeDelete, hookDelegate);
-            return cloud;
+            return cloud.UseHook(className, EngineHookType.BeforeDelete, hookDelegate);
+        }
+
+        public static Cloud BeforeDelete(this Cloud cloud, string className, EngineHookDelegateSynchronous hookDelegate)
+        {
+            return cloud.UseHook(className, EngineHookType.BeforeDelete, hookDelegate);
         }
 
         public static Cloud AfterDelete(this Cloud cloud, string className, EngineHookDelegate hookDelegate)
         {
-            cloud.UseHook(className, EngineHookType.AfterDelete, hookDelegate);
-            return cloud;
+            return cloud.UseHook(className, EngineHookType.AfterDelete, hookDelegate);
+        }
+
+        public static Cloud AfterDelete(this Cloud cloud, string className, EngineHookDelegateSynchronous hookDelegate)
+        {
+            return cloud.UseHook(className, EngineHookType.AfterDelete, hookDelegate);
         }
 
         #region seperate TheObject with context in delegate
 
         public static Cloud UseHook(this Cloud cloud, string className, EngineHookType hookType, EngineObjectHookDelegate hookDelegate)
         {
-            cloud.UseHook(className, hookType, (EngineObjectHookContext context) =>
+            return cloud.UseHook(className, hookType, (EngineObjectHookContext context) =>
             {
                 return hookDelegate(context.TheObject);
             });
-            return cloud;
+        }
+
+        public static Cloud UseHook(this Cloud cloud, string className, EngineHookType hookType, EngineObjectHookDeltegateSynchronous hookDelegate)
+        {
+            return cloud.UseHook(className, hookType, (EngineObjectHookContext context) =>
+            {
+                return Task.Factory.StartNew(() => hookDelegate(context.TheObject));
+            });
+        }
+
+        public static Cloud BeforeSave(this Cloud cloud, string className, EngineObjectHookDeltegateSynchronous hookDelegate)
+        {
+            return cloud.UseHook(className, EngineHookType.BeforeSave, hookDelegate);
         }
 
         public static Cloud BeforeSave(this Cloud cloud, string className, EngineObjectHookDelegate hookDelegate)
         {
-            cloud.UseHook(className, EngineHookType.BeforeSave, hookDelegate);
-            return cloud;
+            return cloud.UseHook(className, EngineHookType.BeforeSave, hookDelegate);
         }
 
         public static Cloud AfterSave(this Cloud cloud, string className, EngineObjectHookDelegate hookDelegate)
         {
-            cloud.UseHook(className, EngineHookType.AfterSave, hookDelegate);
-            return cloud;
+            return cloud.UseHook(className, EngineHookType.AfterSave, hookDelegate);
+        }
+
+        public static Cloud AfterSave(this Cloud cloud, string className, EngineObjectHookDeltegateSynchronous hookDelegate)
+        {
+            return cloud.UseHook(className, EngineHookType.AfterSave, hookDelegate);
         }
 
         public static Cloud BeforeUpdate(this Cloud cloud, string className, EngineObjectHookDelegate hookDelegate)
         {
-            cloud.UseHook(className, EngineHookType.BeforeUpdate, hookDelegate);
-            return cloud;
+            return cloud.UseHook(className, EngineHookType.BeforeUpdate, hookDelegate);
+        }
+
+        public static Cloud BeforeUpdate(this Cloud cloud, string className, EngineObjectHookDeltegateSynchronous hookDelegate)
+        {
+            return cloud.UseHook(className, EngineHookType.BeforeUpdate, hookDelegate);
         }
 
         public static Cloud AfterUpdate(this Cloud cloud, string className, EngineObjectHookDelegate hookDelegate)
         {
-            cloud.UseHook(className, EngineHookType.AfterUpdate, hookDelegate);
-            return cloud;
+            return cloud.UseHook(className, EngineHookType.AfterUpdate, hookDelegate);
+        }
+
+        public static Cloud AfterUpdate(this Cloud cloud, string className, EngineObjectHookDeltegateSynchronous hookDelegate)
+        {
+            return cloud.UseHook(className, EngineHookType.AfterUpdate, hookDelegate);
         }
 
         public static Cloud BeforeDelete(this Cloud cloud, string className, EngineObjectHookDelegate hookDelegate)
         {
-            cloud.UseHook(className, EngineHookType.BeforeDelete, hookDelegate);
-            return cloud;
+            return cloud.UseHook(className, EngineHookType.BeforeDelete, hookDelegate);
+        }
+
+        public static Cloud BeforeDelete(this Cloud cloud, string className, EngineObjectHookDeltegateSynchronous hookDelegate)
+        {
+            return cloud.UseHook(className, EngineHookType.BeforeDelete, hookDelegate);
         }
 
         public static Cloud AfterDelete(this Cloud cloud, string className, EngineObjectHookDelegate hookDelegate)
         {
-            cloud.UseHook(className, EngineHookType.AfterDelete, hookDelegate);
-            return cloud;
+            return cloud.UseHook(className, EngineHookType.AfterDelete, hookDelegate);
+        }
+        public static Cloud AfterDelete(this Cloud cloud, string className, EngineObjectHookDeltegateSynchronous hookDelegate)
+        {
+            return cloud.UseHook(className, EngineHookType.AfterDelete, hookDelegate);
         }
 
         #endregion
@@ -126,59 +190,90 @@ namespace LeanCloud.Engine
         #region passing current user
         public static Cloud UseHook(this Cloud cloud, string className, EngineHookType hookType, EngineObjectWithUserHookDelegate hookDelegate)
         {
-            cloud.UseHook(className, hookType, (EngineObjectHookContext context) =>
+            return cloud.UseHook(className, hookType, (EngineObjectHookContext context) =>
             {
                 return hookDelegate(context.TheObject, context.By);
             });
-            return cloud;
+        }
+
+        public static Cloud UseHook(this Cloud cloud, string className, EngineHookType hookType, EngineObjectWithUserHookDelegateSynchronous hookDelegate)
+        {
+            return cloud.UseHook(className, hookType, (EngineObjectHookContext context) =>
+            {
+                return Task.Factory.StartNew(() => hookDelegate(context.TheObject, context.By));
+            });
         }
 
         public static Cloud BeforeSave(this Cloud cloud, string className, EngineObjectWithUserHookDelegate hookDelegate)
         {
-            cloud.UseHook(className, EngineHookType.BeforeSave, hookDelegate);
-            return cloud;
+            return cloud.UseHook(className, EngineHookType.BeforeSave, hookDelegate);
+        }
+
+        public static Cloud BeforeSave(this Cloud cloud, string className, EngineObjectWithUserHookDelegateSynchronous hookDelegate)
+        {
+            return cloud.UseHook(className, EngineHookType.BeforeSave, hookDelegate);
         }
 
         public static Cloud AfterSave(this Cloud cloud, string className, EngineObjectWithUserHookDelegate hookDelegate)
         {
-            cloud.UseHook(className, EngineHookType.AfterSave, hookDelegate);
-            return cloud;
+            return cloud.UseHook(className, EngineHookType.AfterSave, hookDelegate);
+        }
+
+        public static Cloud AfterSave(this Cloud cloud, string className, EngineObjectWithUserHookDelegateSynchronous hookDelegate)
+        {
+            return cloud.UseHook(className, EngineHookType.AfterSave, hookDelegate);
         }
 
         public static Cloud BeforeUpdate(this Cloud cloud, string className, EngineObjectWithUserHookDelegate hookDelegate)
         {
-            cloud.UseHook(className, EngineHookType.BeforeUpdate, hookDelegate);
-            return cloud;
+            return cloud.UseHook(className, EngineHookType.BeforeUpdate, hookDelegate);
+        }
+
+        public static Cloud BeforeUpdate(this Cloud cloud, string className, EngineObjectWithUserHookDelegateSynchronous hookDelegate)
+        {
+            return cloud.UseHook(className, EngineHookType.BeforeUpdate, hookDelegate);
         }
 
         public static Cloud AfterUpdate(this Cloud cloud, string className, EngineObjectWithUserHookDelegate hookDelegate)
         {
-            cloud.UseHook(className, EngineHookType.AfterUpdate, hookDelegate);
-            return cloud;
+            return cloud.UseHook(className, EngineHookType.AfterUpdate, hookDelegate);
+        }
+
+        public static Cloud AfterUpdate(this Cloud cloud, string className, EngineObjectWithUserHookDelegateSynchronous hookDelegate)
+        {
+            return cloud.UseHook(className, EngineHookType.AfterUpdate, hookDelegate);
         }
 
         public static Cloud BeforeDelete(this Cloud cloud, string className, EngineObjectWithUserHookDelegate hookDelegate)
         {
-            cloud.UseHook(className, EngineHookType.BeforeDelete, hookDelegate);
-            return cloud;
+            return cloud.UseHook(className, EngineHookType.BeforeDelete, hookDelegate);
+        }
+
+        public static Cloud BeforeDelete(this Cloud cloud, string className, EngineObjectWithUserHookDelegateSynchronous hookDelegate)
+        {
+            return cloud.UseHook(className, EngineHookType.BeforeDelete, hookDelegate);
         }
 
         public static Cloud AfterDelete(this Cloud cloud, string className, EngineObjectWithUserHookDelegate hookDelegate)
         {
-            cloud.UseHook(className, EngineHookType.AfterDelete, hookDelegate);
-            return cloud;
+            return cloud.UseHook(className, EngineHookType.AfterDelete, hookDelegate);
+        }
+
+        public static Cloud AfterDelete(this Cloud cloud, string className, EngineObjectWithUserHookDelegateSynchronous hookDelegate)
+        {
+            return cloud.UseHook(className, EngineHookType.AfterDelete, hookDelegate);
         }
         #endregion
 
         #region generic sub-class hook
+
         public static Cloud UseHook<TAVObject>(this Cloud cloud, EngineHookType hookType, EngineObjectHookDelegate<TAVObject> hookDelegate) where TAVObject : AVObject
         {
             var className = AVObject.GetSubClassName<TAVObject>();
-            cloud.UseHook(className, hookType, (EngineObjectHookContext context) =>
+            return cloud.UseHook(className, hookType, (EngineObjectHookContext context) =>
              {
                  return hookDelegate(context.TheObject as TAVObject);
              });
-            return cloud;
         }
 
         public static Cloud BeforeSave<TAVObject>(this Cloud cloud, EngineObjectHookDelegate<TAVObject> hookDelegate) where TAVObject : AVObject
@@ -186,6 +281,7 @@ namespace LeanCloud.Engine
             cloud.UseHook(EngineHookType.BeforeSave, hookDelegate);
             return cloud;
         }
+
         public static Cloud AfterSave<TAVObject>(this Cloud cloud, EngineObjectHookDelegate<TAVObject> hookDelegate) where TAVObject : AVObject
         {
             cloud.UseHook(EngineHookType.AfterSave, hookDelegate);
@@ -437,34 +533,123 @@ namespace LeanCloud.Engine
             });
             return cloud;
         }
+        #region on verified
 
-        public static Cloud OnVerifiedSMS(this Cloud cloud, Func<AVUser, Task> func)
+        public static Cloud OnVerifiedSMS(this Cloud cloud, EngineUserHookDelegate hookDelegate)
         {
-            cloud.OnVerified("sms", context =>
-            {
-                return func.Invoke(context.TheUser);
-            });
-            return cloud;
+            return cloud.OnVerified("sms", hookDelegate);
         }
 
-        public static Cloud OnVerifiedEmail(this Cloud cloud, Func<AVUser, Task> func)
+        public static Cloud OnVerifiedSMS(this Cloud cloud, EngineUserHookDelegateSynchronous hookDelegate)
         {
-            cloud.OnVerified("email", context =>
+            EngineUserHookDelegate del = (context) =>
             {
-                return func.Invoke(context.TheUser);
-            });
-            return cloud;
+                return Task.Factory.StartNew(() => hookDelegate(context));
+            };
+            return cloud.OnVerifiedSMS(del);
         }
 
-        public static Cloud OnLogIn(this Cloud cloud, Func<AVUser, Task> func)
+        public static Cloud OnVerifiedSMS(this Cloud cloud, Func<AVUser, Task> hookDelegate)
+        {
+            EngineUserHookDelegate del = (context) =>
+            {
+                return hookDelegate(context.TheUser);
+            };
+            return cloud.OnVerifiedSMS(del);
+        }
+
+        public static Cloud OnVerifiedSMS(this Cloud cloud, Action<AVUser> hookDelegate)
+        {
+            Func<AVUser, Task> del = (user) =>
+            {
+                return Task.Factory.StartNew(() => hookDelegate(user));
+            };
+            return cloud.OnVerifiedSMS(del);
+        }
+
+        public static Cloud OnVerifiedEmail(this Cloud cloud, EngineUserHookDelegate hookDelegate)
+        {
+            return cloud.OnVerified("email", hookDelegate);
+        }
+
+        public static Cloud OnVerifiedEmail(this Cloud cloud, EngineUserHookDelegateSynchronous hookDelegate)
+        {
+            EngineUserHookDelegate del = (context) =>
+            {
+                return Task.Factory.StartNew(() => hookDelegate(context));
+            };
+            return cloud.OnVerifiedEmail(del);
+        }
+
+        public static Cloud OnVerifiedEmail(this Cloud cloud, Func<AVUser, Task> hookDelegate)
+        {
+            EngineUserHookDelegate del = (context) =>
+            {
+                return hookDelegate(context.TheUser);
+            };
+            return cloud.OnVerifiedEmail(del);
+        }
+
+        public static Cloud OnVerifiedEmail(this Cloud cloud, Action<AVUser> hookDelegate)
+        {
+            Func<AVUser, Task> del = (user) =>
+            {
+                return Task.Factory.StartNew(() => hookDelegate(user));
+            };
+            return cloud.OnVerifiedEmail(del);
+        }
+
+        #endregion
+
+        #region user action hook
+
+        /// <summary>
+        /// Ons the log in.
+        /// </summary>
+        /// <returns>The log in.</returns>
+        /// <param name="cloud">Cloud.</param>
+        /// <param name="onLogInHook">On log in hook.</param>
+        public static Cloud OnLogIn(this Cloud cloud, EngineUserActionHookDelegate onLogInHook)
+        {
+            return cloud.OnUserAction("login", onLogInHook);
+        }
+
+        /// <summary>
+        /// Ons the log in.
+        /// </summary>
+        /// <returns>The log in.</returns>
+        /// <param name="cloud">Cloud.</param>
+        /// <param name="onLogInHook">On log in hook.</param>
+        public static Cloud OnLogIn(this Cloud cloud, Func<AVUser, Task> onLogInHook)
         {
             cloud.OnLogIn(context =>
             {
-                return func.Invoke(context.TheUser);
+                return onLogInHook.Invoke(context.TheUser);
             });
             return cloud;
         }
 
+        /// <summary>
+        /// Ons the log in.
+        /// </summary>
+        /// <returns>The log in.</returns>
+        /// <param name="cloud">Cloud.</param>
+        /// <param name="onLogInHook">On log in hook.</param>
+        public static Cloud OnLogIn(this Cloud cloud, Action<AVUser> onLogInHook)
+        {
+            Func<AVUser, Task> del = (user) => 
+            {
+                return Task.Factory.StartNew(() => onLogInHook(user));
+            };
+            return cloud.OnLogIn(del);
+        }
+
+        public static Cloud OnLogIn(this Cloud cloud)
+        {
+            return cloud;
+        }
+
+        #endregion
         //private static Delegate CreateDelegate(this MethodInfo methodInfo, object target)
         //{
         //    Func<Type[], Type> getType;

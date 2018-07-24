@@ -14,6 +14,7 @@ namespace LeanCloud.Engine.AspNetDemo
             cloud.UseFunction<MovieService>(new MovieService(new string[] { "夏洛特烦恼", "功夫", "大话西游之月光宝盒" }));
             cloud.UseFunction<MovieService>();
             cloud.UseFunction<StaticSampleService>();
+
             return cloud;
         }
     }

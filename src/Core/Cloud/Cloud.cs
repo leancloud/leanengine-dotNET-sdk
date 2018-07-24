@@ -12,9 +12,19 @@ namespace LeanCloud.Engine
     public delegate Task EngineHookDelegate(EngineObjectHookContext context);
 
     /// <summary>
+    /// Engine hook delegate synchronous.
+    /// </summary>
+    public delegate void EngineHookDelegateSynchronous(EngineObjectHookContext context);
+
+    /// <summary>
     /// Engine object hook delegate.
     /// </summary>
     public delegate Task EngineObjectHookDelegate(AVObject theObject);
+
+    /// <summary>
+    /// Engine object hook deltegate synchronous.
+    /// </summary>
+    public delegate void EngineObjectHookDeltegateSynchronous(AVObject theObject);
 
     /// <summary>
     /// Engine object with user hook delegate.
@@ -22,14 +32,29 @@ namespace LeanCloud.Engine
     public delegate Task EngineObjectWithUserHookDelegate(AVObject theObject, AVUser by);
 
     /// <summary>
+    /// Engine object with user hook delegate synchronous.
+    /// </summary>
+    public delegate void EngineObjectWithUserHookDelegateSynchronous(AVObject theObject, AVUser by);
+
+    /// <summary>
     /// Engine object hook delegate.
     /// </summary>
     public delegate Task EngineObjectHookDelegate<TAVObject>(TAVObject theObject);
 
     /// <summary>
+    /// Engine object hook delegate synchronous.
+    /// </summary>
+    public delegate void EngineObjectHookDelegateSynchronous<TAVObject>(TAVObject theObject);
+
+    /// <summary>
     /// Engine object with user hook delegate.
     /// </summary>
     public delegate Task EngineObjectWithUserHookDelegate<TAVObject>(TAVObject theObject, AVUser by);
+
+    /// <summary>
+    /// Engine object with user hook delegate synchronous.
+    /// </summary>
+    public delegate void EngineObjectWithUserHookDelegateSynchronous<TAVObject>(TAVObject theObject, AVUser by);
 
     /// <summary>
     /// Engine function delegate.
@@ -42,9 +67,19 @@ namespace LeanCloud.Engine
     public delegate Task EngineUserHookDelegate(EngineUserVerifyHookContext context);
 
     /// <summary>
+    /// Engine user hook delegate synchronous.
+    /// </summary>
+    public delegate void EngineUserHookDelegateSynchronous(EngineUserVerifyHookContext context);
+
+    /// <summary>
     /// Engine user action hook delegate.
     /// </summary>
     public delegate Task EngineUserActionHookDelegate(EngineUserActionHookContext context);
+
+    /// <summary>
+    /// Engine user action hook delegate synchronous.
+    /// </summary>
+    public delegate Task EngineUserActionHookDelegateSynchronous(EngineUserActionHookContext context);
 
     /// <summary>
     /// Cloud.
@@ -228,7 +263,7 @@ namespace LeanCloud.Engine
 
         internal static string[] userActionHookMetaData = new string[]
         {
-            "__on_login__User"
+            "__on_{0}__User"
         };
 
         internal static string FunctionMetaName(string className, EngineHookType hookType)
@@ -315,7 +350,7 @@ namespace LeanCloud.Engine
         /// <param name="userActionHookHandler">User action hook handler.</param>
         public Cloud Register(string action, IEngineUserActionHookHandler userActionHookHandler)
         {
-            var hookName = userActionHookMetaData[0];
+            var hookName = string.Format(userActionHookMetaData[0], action);
             UserActionHooks[hookName] = userActionHookHandler;
             return this;
         }
@@ -403,7 +438,7 @@ namespace LeanCloud.Engine
         /// <param name="context">Context.</param>
         public Task Invoke(string action, EngineUserActionHookContext context)
         {
-            var hookName = userActionHookMetaData[0];
+            var hookName = string.Format(userActionHookMetaData[0], action);
             if (UserActionHooks.ContainsKey(hookName))
             {
                 var function = UserActionHooks[hookName];
@@ -501,13 +536,14 @@ namespace LeanCloud.Engine
         }
 
         /// <summary>
-        /// On the log in.
+        /// Ons the user action.
         /// </summary>
-        /// <returns>The log in.</returns>
+        /// <returns>The user action.</returns>
+        /// <param name="action">Action.</param>
         /// <param name="actionHook">Action hook.</param>
-        public Cloud OnLogIn(EngineUserActionHookDelegate actionHook)
+        public Cloud OnUserAction(string action, EngineUserActionHookDelegate actionHook)
         {
-            return Register("login", new StandardUserActionHandler(actionHook));
+            return Register(action, new StandardUserActionHandler(actionHook));
         }
     }
 }
