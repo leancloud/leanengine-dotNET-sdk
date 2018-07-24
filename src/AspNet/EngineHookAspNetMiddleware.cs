@@ -570,8 +570,7 @@ namespace LeanCloud.Engine
             using (var reader = new StreamReader(context.Request.Body))
             {
                 var body = reader.ReadToEnd();
-                var data = JsonConvert.DeserializeObject<Dictionary<string, object>>(body);
-
+                var data = Json.Parse(body) as Dictionary<string, object>;
                 var engineContext = new EngineFunctionContext
                 {
                     FunctionName = funcName,
@@ -585,7 +584,7 @@ namespace LeanCloud.Engine
                     {
                         { "result", engineContext.Result }
                     };
-                    var encodedStr = JsonConvert.SerializeObject(resultWrapper);
+                    var encodedStr = Json.Encode(resultWrapper);
                     await context.Response.WriteAsync(encodedStr);
                 }
                 catch (Exception ex)
