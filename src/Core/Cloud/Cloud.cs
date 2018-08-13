@@ -225,7 +225,7 @@ namespace LeanCloud.Engine
                 AVClient.Initialize(configuration);
             }
         }
-
+         
         internal static IDictionary<string, IEngineObjectHookHandler> Hooks { get; set; } = new Dictionary<string, IEngineObjectHookHandler>();
 
         internal static IDictionary<string, IEngineFunctionHandler> Funcs = new Dictionary<string, IEngineFunctionHandler>();
