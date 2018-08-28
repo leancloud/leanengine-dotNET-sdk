@@ -630,20 +630,25 @@ namespace LeanCloud.Engine
         }
 
         /// <summary>
-        /// Ons the log in.
+        /// on login hook
         /// </summary>
         /// <returns>The log in.</returns>
         /// <param name="cloud">Cloud.</param>
         /// <param name="onLogInHook">On log in hook.</param>
         public static Cloud OnLogIn(this Cloud cloud, Action<AVUser> onLogInHook)
         {
-            Func<AVUser, Task> del = (user) => 
+            Func<AVUser, Task> del = (user) =>
             {
                 return Task.Factory.StartNew(() => onLogInHook(user));
             };
             return cloud.OnLogIn(del);
         }
 
+        /// <summary>
+        /// on login hook
+        /// </summary>
+        /// <returns>The log in.</returns>
+        /// <param name="cloud">Cloud.</param>
         public static Cloud OnLogIn(this Cloud cloud)
         {
             return cloud;

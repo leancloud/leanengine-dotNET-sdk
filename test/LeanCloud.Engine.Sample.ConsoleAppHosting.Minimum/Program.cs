@@ -7,7 +7,7 @@ namespace AppHosting.Minimum
     {
         public static void Main(string[] args)
         {
-            Cloud cloud = new Cloud().UseLog();
+            Cloud cloud = new Cloud().UseLog().UseExtensionFunctions();
             cloud.Start(args);
         }
     }
