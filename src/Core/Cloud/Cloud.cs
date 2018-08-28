@@ -152,8 +152,7 @@ namespace LeanCloud.Engine
         private bool CompareLeanEnv(string target, LeanEnvKey key)
         {
             var leanEnv = GetLeanEnv(key);
-            if (string.IsNullOrEmpty(leanEnv)) return false;
-            return target.Equals(leanEnv);
+            return !string.IsNullOrEmpty(leanEnv) && target.Equals(leanEnv);
         }
 
         /// <summary>
@@ -371,7 +370,7 @@ namespace LeanCloud.Engine
                 return hook.ExecuteAsync(context);
             }
 
-            return Task.FromResult("");
+            return Task.FromResult(false);
         }
 
         /// <summary>
@@ -410,7 +409,7 @@ namespace LeanCloud.Engine
                 var function = Funcs[functionName];
                 return function.ExecuteAsync(context);
             }
-            return Task.FromResult("");
+            return Task.FromResult(false);
         }
 
         /// <summary>
@@ -427,7 +426,7 @@ namespace LeanCloud.Engine
                 var function = VerifyHooks[hookName];
                 return function.ExecuteAsync(context);
             }
-            return Task.FromResult("");
+            return Task.FromResult(false);
         }
 
         /// <summary>
@@ -444,7 +443,7 @@ namespace LeanCloud.Engine
                 var function = UserActionHooks[hookName];
                 return function.ExecuteAsync(context);
             }
-            return Task.FromResult("");
+            return Task.FromResult(false);
         }
 
         /// <summary>

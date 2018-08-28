@@ -383,6 +383,17 @@ namespace LeanCloud.Engine
         }
 
         #region get hosting sub-domain with schema
+
+        /// <summary>
+        /// Uses the extension functions.
+        /// </summary>
+        /// <returns>The extension functions.</returns>
+        /// <param name="cloud">Cloud.</param>
+        public static Cloud UseExtensionFunctions(this Cloud cloud)
+        {
+            return cloud.Define<string>("_internal_extensions_get_domain", cloud.GetHostingUrl);
+        }
+
         /// <summary>
         /// get hosting url,eg https://dotnetweb.leanapp.cn
         /// </summary>
