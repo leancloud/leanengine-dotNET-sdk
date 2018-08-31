@@ -9,7 +9,7 @@
     <DocumentationFile>bin\Debug\netcoreapp2.0\LeanCloud.Engine.Middleware.AspNetCore.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="LeanCloud.Engine" Version="2018.7.10.1" />
+    <PackageReference Include="LeanCloud.Engine" Version="2018.8.9.1" />
     <PackageReference Include="Microsoft.AspNetCore" Version="2.1.0" />
     <PackageReference Include="Microsoft.Extensions.Caching.Redis" Version="2.0.0" />
   </ItemGroup>

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using LeanCloud.Core.Internal;
 
 namespace LeanCloud.Engine.AspNetDemo
 {
@@ -70,7 +71,7 @@ namespace LeanCloud.Engine.AspNetDemo
                 return Task.FromResult(todo);
             });
 
-            cloud.BeforeUpdate("Todo", review => 
+            cloud.BeforeUpdate("Todo", review =>
             {
                 var updatedKeys = review.GetUpdatedKeys();
                 if (updatedKeys.Contains("comment"))
@@ -80,6 +81,29 @@ namespace LeanCloud.Engine.AspNetDemo
                 }
                 return Task.FromResult(true);
             });
+
+            EngineHookDelegateSynchronous afterPostHook = (post) =>
+            {
+
+            };
+
+            cloud.AfterSave("Post", (EngineObjectHookDeltegateSynchronous)(async post =>
+            {
+                // 直接修改并保存对象不会再次触发 after update hook 函数
+                post["foo"] = "bar";
+                await post.SaveAsync();
+                // 如果有 FetchAsync 操作，则需要在新获得的对象上调用相关的 disable 方法
+                // 来确保不会再次触发 Hook 函数
+                await post.FetchAsync();
+                post.DisableAfterHook();
+                post["foo"] = "bar";
+
+                // 如果是其他方式构建对象，则需要在新构建的对象上调用相关的 disable 方法
+                // 来确保不会再次触发 Hook 函数
+                post = AVObject.CreateWithoutData<AVObject>(post.ObjectId);
+                post.DisableAfterHook();
+                await post.SaveAsync();
+            }));
         }
 
         public class Todo : AVObject

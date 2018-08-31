@@ -1,0 +1,24 @@
+
+<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework>netcoreapp2.1</TargetFramework>
+		<RootNamespace>LeanCloud.Engine.RpcClient</RootNamespace>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+		<DebugSymbols>true</DebugSymbols>
+		<DebugType>full</DebugType>
+		<Optimize>false</Optimize>
+		<OutputPath>bin\Debug\netcoreapp2.1</OutputPath>
+		<IntermediateOutputPath>obj\Debug\netcoreapp2.1</IntermediateOutputPath>
+		<DefineConstants>DEBUG;</DefineConstants>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+		<Optimize>true</Optimize>
+		<OutputPath>bin\Release\</OutputPath>
+		<IntermediateOutputPath>obj\Release</IntermediateOutputPath>
+	</PropertyGroup>
+	<ItemGroup>
+		<Compile Remove="LeanCloud.Engine.Rpc.Client.Unity\Properties\AssemblyInfo.cs" />
+		<Compile Remove="Properties\AssemblyInfo.cs" />
+	</ItemGroup>
+</Project>
