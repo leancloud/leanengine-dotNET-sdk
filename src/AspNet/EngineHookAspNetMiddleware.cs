@@ -291,12 +291,12 @@ namespace LeanCloud.Engine
                     await next();
                 }
             });
-
+            
             routeBuilder.MapGet("/__engine/{version}/ping", Pong);
-            routeBuilder.MapPost("/{version}/functions/{className}/{hookName}", InvokeClassHook);
             routeBuilder.MapPost("/{version}/functions/onVerified/{verifiedField}", InvokeVerifyHook);
             routeBuilder.MapPost("/{version}/functions/_User/{action}", InvokeUserHook);
             routeBuilder.MapGet("/{version}/functions/_ops/metadatas", ResponseFunctionList);
+            routeBuilder.MapPost("/{version}/functions/{className}/{hookName}", InvokeClassHook);
             routeBuilder.MapPost("/{version}/{funcOrRpc}/{funcName}", ResponseCloudFunction);
 
             var routes = routeBuilder.Build();
