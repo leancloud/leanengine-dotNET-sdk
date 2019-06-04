@@ -611,7 +611,7 @@ namespace LeanCloud.Engine
         /// <param name="onLogInHook">On log in hook.</param>
         public static Cloud OnLogIn(this Cloud cloud, EngineUserActionHookDelegate onLogInHook)
         {
-            return cloud.OnUserAction("onLogin", onLogInHook);
+            return cloud.OnUserAction("login", onLogInHook);
         }
 
         /// <summary>

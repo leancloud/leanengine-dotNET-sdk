@@ -15,10 +15,12 @@
         <language>en-US</language>
         <tags>LeanCloud paas baas storage cloud</tags>
         <dependencies>
-            <dependency id="LeanCloud.Engine" version="2019.6.4.2" />
             <dependency id="Microsoft.AspNetCore" version="2.1.0" />
             <dependency id="Microsoft.Extensions.Caching.Redis" version="2.0.0" />
         </dependencies>
+        <references>
+            <reference file="LeanCloud.Engine.dll" />
+        </references>
     </metadata>
     <files>
         <!--NetCore-->

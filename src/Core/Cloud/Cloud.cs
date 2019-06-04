@@ -430,6 +430,13 @@ namespace LeanCloud.Engine
         }
 
         /// <summary>
+        /// 请求接口与 hook 名之间的映射
+        /// </summary>
+        readonly static Dictionary<string, string> UserActionDict = new Dictionary<string, string> {
+            { "onLogin", "login" }
+        };
+
+        /// <summary>
         /// Invoke the specified action and context.
         /// </summary>
         /// <returns>The invoke.</returns>
@@ -437,6 +444,7 @@ namespace LeanCloud.Engine
         /// <param name="context">Context.</param>
         public Task Invoke(string action, EngineUserActionHookContext context)
         {
+            action = UserActionDict[action] ?? action;
             var hookName = string.Format(userActionHookMetaData[0], action);
             if (UserActionHooks.ContainsKey(hookName))
             {
