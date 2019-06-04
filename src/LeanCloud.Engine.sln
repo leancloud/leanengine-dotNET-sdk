@@ -42,6 +42,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Rpc", "Rpc", "{520BE217-270
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RpcSample.Minimum", "..\test\RpcSample.Minimum\RpcSample.Minimum.csproj", "{91BEDCDE-BB24-45BF-A262-AA96567CE7B0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GettingStarted", "..\test\GettingStarted\GettingStarted.csproj", "{51BDB679-7331-4F66-AD25-DD98D95FA755}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -108,6 +110,10 @@ Global
 		{91BEDCDE-BB24-45BF-A262-AA96567CE7B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{91BEDCDE-BB24-45BF-A262-AA96567CE7B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{91BEDCDE-BB24-45BF-A262-AA96567CE7B0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{51BDB679-7331-4F66-AD25-DD98D95FA755}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51BDB679-7331-4F66-AD25-DD98D95FA755}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51BDB679-7331-4F66-AD25-DD98D95FA755}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51BDB679-7331-4F66-AD25-DD98D95FA755}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -128,6 +134,7 @@ Global
 		{2C7BB7F5-E230-4BA1-9975-9255879FCBD8} = {EE2129D5-51A4-4FC6-9AF8-DA5753B08FCF}
 		{520BE217-270A-424C-8F67-A9396245FBC7} = {1D31A919-27E8-4303-9AF6-15AE88326757}
 		{91BEDCDE-BB24-45BF-A262-AA96567CE7B0} = {520BE217-270A-424C-8F67-A9396245FBC7}
+		{51BDB679-7331-4F66-AD25-DD98D95FA755} = {EE2129D5-51A4-4FC6-9AF8-DA5753B08FCF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7C09F422-9C58-43FC-AA7D-81FE713D95DE}
