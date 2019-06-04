@@ -437,7 +437,7 @@ namespace LeanCloud.Engine
         /// <param name="context">Context.</param>
         public Task Invoke(string action, EngineUserActionHookContext context)
         {
-            var hookName = string.Format(userActionHookMetaData[0], action == "onLogin" ? "login" : action);
+            var hookName = string.Format(userActionHookMetaData[0], action);
             if (UserActionHooks.ContainsKey(hookName))
             {
                 var function = UserActionHooks[hookName];
