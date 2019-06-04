@@ -708,9 +708,9 @@ namespace LeanCloud.Engine
             {
                 var body = reader.ReadToEnd();
                 var data = Json.Parse(body) as IDictionary<string, object>;
-                var objectState = AVObjectCoder.Instance.Decode(data, AVDecoder.Instance);
-                var engineContext = new EngineUserActionHookContext()
-                {
+                var userData = data["object"] as IDictionary<string, object>;
+                var objectState = AVObjectCoder.Instance.Decode(userData, AVDecoder.Instance);
+                var engineContext = new EngineUserActionHookContext() {
                     TheUser = AVObject.FromState<AVUser>(objectState, "_User"),
                     Action = action
                 };
