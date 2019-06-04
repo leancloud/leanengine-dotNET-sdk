@@ -710,12 +710,17 @@ namespace LeanCloud.Engine
                 var data = Json.Parse(body) as IDictionary<string, object>;
                 var userData = data["object"] as IDictionary<string, object>;
                 var objectState = AVObjectCoder.Instance.Decode(userData, AVDecoder.Instance);
-                var engineContext = new EngineUserActionHookContext() {
-                    TheUser = AVObject.FromState<AVUser>(objectState, "_User"),
-                    Action = action
-                };
-                var t = hostingCloud.Invoke(action, engineContext);
-                await HandleResult(context, t);
+                try {
+                    var engineContext = new EngineUserActionHookContext {
+                        TheUser = AVObject.FromState<AVUser>(objectState, "_User"),
+                        Action = action
+                    };
+                    var t = hostingCloud.Invoke(action, engineContext);
+                    await HandleResult(context, t);
+                } catch (Exception e) {
+                    Console.WriteLine(e.Message);
+                    throw e;
+                }
             }
         }
 
