@@ -188,7 +188,7 @@ namespace LeanCloud.Engine
         {
             get
             {
-                return CompareLeanEnv("staging", LeanEnvKey.LEANCLOUD_APP_ENV);
+                return CompareLeanEnv("stage", LeanEnvKey.LEANCLOUD_APP_ENV);
             }
         }
 

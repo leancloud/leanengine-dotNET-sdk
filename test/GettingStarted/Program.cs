@@ -15,7 +15,16 @@ namespace GettingStarted {
                 Console.WriteLine($"{user.Username} loged in");
             });
             cloud.UseLog();
+            GetHooks(cloud);
             cloud.Start(args);
         }
+
+        static async void GetHooks(Cloud cloud) {
+            var hooks = await cloud.QueryCloudFunctionsMetaDataAsync();
+            foreach (var hook in hooks) {
+                Console.WriteLine(hook);
+            }
+        }
+
     }
 }
