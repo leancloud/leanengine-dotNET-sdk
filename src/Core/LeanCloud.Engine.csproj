@@ -24,7 +24,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="LeanCloud.Storage" Version="2018.8.31.1" />
+    <PackageReference Include="LeanCloud.Storage" Version="2019.9.17.1" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="LeanCloud.Engine.AspNet.Core\obj\LeanCloud.Engine.AspNet.Core.csproj.nuget.cache" />
