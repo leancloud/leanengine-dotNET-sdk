@@ -120,6 +120,10 @@ namespace LeanCloud.Engine
             get => GetLeanEnv(LeanEnvKey.LEANCLOUD_APP_MASTER_KEY);
         }
 
+        public string APIServer {
+            get => GetLeanEnv(LeanEnvKey.LEANCLOUD_API_SERVER);
+        }
+
         /// <summary>
         /// Lean env key.
         /// </summary>
@@ -219,7 +223,8 @@ namespace LeanCloud.Engine
                 {
                     ApplicationId = AppId,
                     ApplicationKey = AppKey,
-                    MasterKey = MasterKey
+                    MasterKey = MasterKey,
+                    ApiServer = new Uri(APIServer)
                 };
                 AVClient.Initialize(configuration);
             }
